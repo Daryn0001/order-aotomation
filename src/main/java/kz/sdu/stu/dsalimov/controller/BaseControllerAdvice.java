@@ -1,7 +1,7 @@
 package kz.sdu.stu.dsalimov.controller;
 
 
-import kz.sdu.stu.dsalimov.dto.db.response.ErrorResponse;
+import kz.sdu.stu.dsalimov.dto.response.ErrorResponse;
 import kz.sdu.stu.dsalimov.exceptions.BadRequestException;
 import kz.sdu.stu.dsalimov.exceptions.DataNotFoundException;
 import kz.sdu.stu.dsalimov.exceptions.DuplicateException;

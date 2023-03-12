@@ -1,4 +1,4 @@
-package kz.sdu.stu.dsalimov.dto.db.response;
+package kz.sdu.stu.dsalimov.dto.response;
 
 import lombok.*;
 

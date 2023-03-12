@@ -1,7 +1,7 @@
 package kz.sdu.stu.dsalimov.controller;
 
 import kz.sdu.stu.dsalimov.dto.db.TableDetails;
-import kz.sdu.stu.dsalimov.dto.db.response.SuccessResponse;
+import kz.sdu.stu.dsalimov.dto.response.SuccessResponse;
 import kz.sdu.stu.dsalimov.register.TableRegister;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
