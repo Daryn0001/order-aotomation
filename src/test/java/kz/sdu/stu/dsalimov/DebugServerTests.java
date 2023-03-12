@@ -1,10 +1,10 @@
-package kz.sdu.stu.dsalimov.demo;
+package kz.sdu.stu.dsalimov;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class OrderAutomationApplicationTests {
+class DebugServerTests {
 
 	@Test
 	void contextLoads() {
