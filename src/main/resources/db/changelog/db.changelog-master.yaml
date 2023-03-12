@@ -1,7 +1,7 @@
 databaseChangeLog:
 
   - include:
-      file: 1_0/orders.sql
+      file: 1_0/order_details.sql
       relativeToChangelogFile: true
 
   - include:
@@ -9,19 +9,19 @@ databaseChangeLog:
       relativeToChangelogFile: true
 
   - include:
-      file: 1_0/tables.sql
+      file: 1_0/table_details.sql
       relativeToChangelogFile: true
 
   - include:
-      file: 1_0/baskets.sql
+      file: 1_0/basket.sql
       relativeToChangelogFile: true
 
   - include:
-      file: 1_0/categories.sql
+      file: 1_0/category.sql
       relativeToChangelogFile: true
 
   - include:
-      file: 1_0/dishes.sql
+      file: 1_0/dish.sql
       relativeToChangelogFile: true
 
   - include:

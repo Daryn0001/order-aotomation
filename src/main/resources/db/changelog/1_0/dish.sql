@@ -1,7 +1,7 @@
-CREATE TABLE IF NOT EXISTS dishes
+CREATE TABLE IF NOT EXISTS dish
 (
     uuid VARCHAR(255) NOT NULL,
-    tittle VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     pictures TEXT NOT NULL,
     ingredients TEXT NOT NULL,

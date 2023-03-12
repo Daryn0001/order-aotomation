@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS baskets
+CREATE TABLE IF NOT EXISTS basket
 (
     uuid varchar(255) NOT NULL,
     amount integer NOT NULL,
