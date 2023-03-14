@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface BasketRegister {
 
-    List<Basket> getOrders();
+    List<Basket> getBaskets();
 
     Basket findById(String uuid);
 
@@ -14,5 +14,5 @@ public interface BasketRegister {
 
     void delete(String uuid);
 
-    void update(Basket order);
+    void update(Basket basket);
 }

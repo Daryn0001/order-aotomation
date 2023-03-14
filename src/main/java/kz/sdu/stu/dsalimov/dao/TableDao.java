@@ -12,15 +12,13 @@ import java.util.List;
 @Mapper
 @Repository
 public interface TableDao {
-    String TABLE_NAME = "table_details";
-
     @Select("SELECT uuid, floor, internal_id as internalId, temporary_key as temporaryKey FROM table_details")
     List<TableDetails> getTables();
 
-    @Select("select * from " + TABLE_NAME + " where uuid = #{uuid}")
+    @Select("select * from table_details where uuid = #{uuid}")
     TableDetails findById(String uuid);
 
-    @Insert("INSERT INTO table_details (uuid, floor, internalId, temporaryKey) VALUES (#{uuid}, #{floor}, #{internalId}, #{temporaryKey})")
+    @Insert("INSERT INTO table_details (uuid, floor, internal_id, temporary_key) VALUES (#{uuid}, #{floor}, #{internalId}, #{temporaryKey})")
     String insert(TableDetails table);
 
     @Delete("DELETE FROM table_details WHERE uuid = #{uuid}")

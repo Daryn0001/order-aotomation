@@ -4,16 +4,10 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import kz.sdu.stu.dsalimov.configs.DbConfig;
 import kz.sdu.stu.dsalimov.dao.BeanConfigDao;
-import org.apache.ibatis.logging.slf4j.Slf4jImpl;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.type.JdbcType;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -35,33 +29,4 @@ public class DbConfiguration {
 
         return new HikariDataSource(config);
     }
-
-//    @Autowired
-//    private DataSource dataSource;
-
-/*    @Bean
-    public JdbcTemplate aux1JdbcTemplate() {
-        return new JdbcTemplate(dataSource(), true);
-    }
-
-    @Bean
-    public DataSourceTransactionManager txManager() {
-        return new DataSourceTransactionManager(dataSource());
-    }
-
-    @Bean
-    public SqlSessionFactory sqlSessionFactory() throws Exception {
-        var configuration = new org.apache.ibatis.session.Configuration();
-        configuration.setJdbcTypeForNull(JdbcType.NULL);
-        configuration.setLogImpl(Slf4jImpl.class);
-        configuration.setMapUnderscoreToCamelCase(true);
-
-        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(dataSource());
-        sqlSessionFactoryBean.setConfiguration(configuration);
-
-        return sqlSessionFactoryBean.getObject();
-    }*/
-
-
 }

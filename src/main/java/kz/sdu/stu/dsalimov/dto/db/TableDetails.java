@@ -7,15 +7,18 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 @Data
 @Entity
-@Accessors(fluent = true)
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Table(name = "table_details")
-public class TableDetails {
+public class TableDetails implements Serializable {
 
     @Id
     @Column(name = "uuid", nullable = false, unique = true)
@@ -29,15 +32,4 @@ public class TableDetails {
 
     @Column(name = "temporary_key", nullable = false)
     private String temporaryKey;
-
-    @Override
-    public String toString() {
-        return "TableDetails{" +
-                "uuid='" + uuid + '\'' +
-                ", floor=" + floor +
-                ", internalId='" + internalId + '\'' +
-                ", temporaryKey='" + temporaryKey + '\'' +
-                '}';
-    }
-
 }

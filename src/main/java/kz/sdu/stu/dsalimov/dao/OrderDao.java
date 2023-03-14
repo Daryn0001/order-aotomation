@@ -1,6 +1,6 @@
 package kz.sdu.stu.dsalimov.dao;
 
-import kz.sdu.stu.dsalimov.dto.db.TableDetails;
+import kz.sdu.stu.dsalimov.dto.db.OrderDetails;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -12,16 +12,16 @@ import java.util.List;
 @Mapper
 @Repository
 public interface OrderDao {
-
+// FIXME
     @Select("SELECT * FROM order_details")
-    List<TableDetails> getTables();
+    List<OrderDetails> getTables();
 
     @Select("select * from order_details where uuid = #{uuid}")
-    TableDetails findById(String uuid);
+    OrderDetails findById(String uuid);
 
     @Insert("INSERT INTO order_details (uuid, floor, internalId, temporaryKey) VALUES (#{uuid}, #{floor}, #{internalId}, #{temporaryKey})")
-    String insert(TableDetails table);
+    void insert(OrderDetails table);
 
     @Delete("DELETE FROM order_details WHERE uuid = #{uuid}")
-    boolean delete(String uuid);
+    void delete(String uuid);
 }

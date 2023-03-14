@@ -3,7 +3,6 @@ package kz.sdu.stu.dsalimov.impl;
 import kz.sdu.stu.dsalimov.dao.TableDao;
 import kz.sdu.stu.dsalimov.dto.db.TableDetails;
 import kz.sdu.stu.dsalimov.register.TableRegister;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,6 @@ import java.util.List;
 public class TableRegisterImpl implements TableRegister {
     @Autowired
     private TableDao tableDao;
-
 
     @Override
     public List<TableDetails> getTables() {
