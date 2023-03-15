@@ -13,6 +13,6 @@ public interface DbConfig {
     String password();
 
     default String url() {
-        return "postgres://" + host() + ":" + port() + "/" + dbName();
+        return "jdbc:postgresql://" + host() + ":" + port() + "/" + dbName();
     }
 }
