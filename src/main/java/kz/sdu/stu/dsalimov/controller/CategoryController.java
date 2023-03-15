@@ -1,7 +1,6 @@
 package kz.sdu.stu.dsalimov.controller;
 
 import kz.sdu.stu.dsalimov.dto.db.Category;
-import kz.sdu.stu.dsalimov.dto.db.Dish;
 import kz.sdu.stu.dsalimov.dto.response.SuccessResponse;
 import kz.sdu.stu.dsalimov.register.CategoryRegister;
 import lombok.RequiredArgsConstructor;
