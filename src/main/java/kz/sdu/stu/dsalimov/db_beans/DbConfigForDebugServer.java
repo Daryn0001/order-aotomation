@@ -13,7 +13,7 @@ public class DbConfigForDebugServer implements DbConfig {
 
     @Override
     public String host() {
-        return "dpg-cg8aikd269vf27fnk9s0-a";
+        return "pgdb";
     }
 
     @Override
@@ -28,6 +28,6 @@ public class DbConfigForDebugServer implements DbConfig {
 
     @Override
     public String password() {
-        return "t0RWbAvXlxrJZA8jRN6jJ5zQUUEI3Edy";
+        return "111";
     }
 }
