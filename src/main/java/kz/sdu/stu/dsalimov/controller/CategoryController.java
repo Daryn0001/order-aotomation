@@ -6,10 +6,8 @@ import kz.sdu.stu.dsalimov.register.CategoryRegister;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -39,4 +37,22 @@ public class CategoryController {
                 HttpStatus.OK
         );
     }
+
+    @PostMapping("/add/category")
+    public ResponseEntity<SuccessResponse> insertCategory(@RequestBody Category category){
+        System.out.println(" new category: " + category);
+        if ((category.getId() != 0) ) {
+            throw new RuntimeException("Крч айди должен быть пустым");
+        }
+
+        this.categoryRegister.insert(category);
+        return new ResponseEntity<>(new SuccessResponse(category, "new category added successfully"), HttpStatus.OK);
+    }
+
+    @PostMapping("/deleteCategory/{id}")
+    public void deleteCategory(@PathVariable int id) {
+        this.categoryRegister.delete(id);
+    }
+
+
 }

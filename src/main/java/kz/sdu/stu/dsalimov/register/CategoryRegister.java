@@ -9,9 +9,9 @@ public interface CategoryRegister {
 
     Category findById(int uuid);
 
-    void insert(Category order);
+    void insert(Category category);
 
-    void delete(int uuid);
+    void delete(int id);
 
-    void update(Category order);
+    void update(Category category);
 }

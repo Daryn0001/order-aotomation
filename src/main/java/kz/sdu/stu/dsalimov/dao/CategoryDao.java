@@ -18,10 +18,12 @@ public interface CategoryDao {
     @Select("SELECT id, parent_category_id as parentCategoryId, name, description FROM category where id = #{id}")
     Category findById(int id);
 
-    @Insert("INSERT INTO category ( id, parent_category_id, name, description)" +
-            " VALUES ( #{id}, #{parentCategoryId}, #{nam1e}, #{description})")
+    @Insert("INSERT INTO category ( parent_category_id, name, description)" +
+            " VALUES ( #{parentCategoryId}, #{name}, #{description})")
     void insert(Category category);
 
     @Delete("DELETE FROM category WHERE id = #{id}")
     void delete(int id);
+
+
 }
