@@ -10,8 +10,6 @@ services:
       - "1313:1313"
     depends_on:
       - pgdb
-    links:
-       - pgdb:pgdb
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://pgdb:5432/order_automation
       - SPRING_DATASOURCE_USERNAME=root

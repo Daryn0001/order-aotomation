@@ -6,10 +6,8 @@ import kz.sdu.stu.dsalimov.register.DishRegister;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -39,5 +37,22 @@ public class DishesController {
                 new SuccessResponse(dish, ""),
                 HttpStatus.OK
         );
+    }
+
+    @PostMapping("/deleteDish/{uuid}")
+    public void deleteDish(@PathVariable("uuid") String uuid) {
+        this.dishRegister.delete(uuid);
+    }
+
+    @PostMapping("add/dish")
+    public ResponseEntity<SuccessResponse> insertDish(@RequestBody Dish dish) {
+        System.out.println(" new dish: " + dish);
+
+        if (!ObjectUtils.isEmpty(dish.getUuid())) {
+            throw new RuntimeException(" Крч айлди должен быть пустым");
+        }
+
+        this.dishRegister.insert(dish);
+        return new ResponseEntity<>(new SuccessResponse(dish, "new dish added successfully"), HttpStatus.OK);
     }
 }

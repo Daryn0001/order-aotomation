@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class DishRegisterImpl implements DishRegister {
@@ -25,6 +26,8 @@ public class DishRegisterImpl implements DishRegister {
 
     @Override
     public void insert(Dish dish) {
+        UUID uuid = UUID.randomUUID();
+        dish.setUuid(uuid.toString());
          this.dishDao.insert(dish);
     }
 

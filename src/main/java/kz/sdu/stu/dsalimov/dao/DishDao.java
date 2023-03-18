@@ -19,8 +19,8 @@ public interface DishDao {
     @Select("SELECT uuid, title, description, pictures, ingredients, amount, notes, category_id AS categoryId FROM dish WHERE uuid = #{uuid}")
     Dish findById(String uuid);
 
-    @Insert("INSERT INTO dish (uuid, title, description, pictures, ingredients, amount, notes, category_id)" +
-            " VALUES (#{uuid}, #{title}, #{description}, #{pictures}, #{ingredients}, #{amount}, #{notes}, #{categoryId})")
+    @Insert("INSERT INTO dish (uuid, title, description, pictures, ingredients, amount, notes, body, category_id)" +
+            " VALUES (#{uuid}, #{title}, #{description}, #{pictures}, #{ingredients}, #{amount}, #{notes}, #{body}, #{categoryId})")
     void insert(Dish dish);
 
     @Delete("DELETE FROM dish WHERE uuid = #{uuid}")

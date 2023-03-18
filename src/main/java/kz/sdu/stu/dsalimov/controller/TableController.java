@@ -59,7 +59,7 @@ public class TableController {
 
         System.out.println(" post mappings");
         if (!ObjectUtils.isEmpty(table.getUuid())) {
-            throw new RuntimeException(" Крч таокй айди есть уже");
+            throw new RuntimeException(" Крч айлди должен быть пустым");
         }
         this.tableRegister.insert(table);
     }

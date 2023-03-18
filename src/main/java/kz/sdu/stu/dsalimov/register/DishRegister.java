@@ -9,9 +9,9 @@ public interface DishRegister {
 
     Dish findById(String uuid);
 
-    void insert(Dish order);
+    void insert(Dish dish);
 
     void delete(String uuid);
 
-    void update(Dish order);
+    void update(Dish dish);
 }
