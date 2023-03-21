@@ -1,4 +1,4 @@
-package kz.sdu.stu.dsalimov;
+package kz.sdu.stu.dsalimov.launcher;
 
 import kz.sdu.stu.dsalimov.bean_containers.BeanConfigForDebugServer;
 import org.springframework.boot.SpringApplication;

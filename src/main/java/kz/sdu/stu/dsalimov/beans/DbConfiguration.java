@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import kz.sdu.stu.dsalimov.configs.DbConfig;
 import kz.sdu.stu.dsalimov.dao.BeanConfigDao;
+import kz.sdu.stu.dsalimov.db_beans.DbConfigForDebugServer;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,8 +17,7 @@ import javax.sql.DataSource;
 @MapperScan(basePackageClasses = BeanConfigDao.class)
 @Configuration
 public class DbConfiguration {
-    @Autowired
-    private DbConfig dbConfig;
+    private final DbConfig dbConfig = new DbConfigForDebugServer();
 
     @Bean
     public DataSource dataSource() {
