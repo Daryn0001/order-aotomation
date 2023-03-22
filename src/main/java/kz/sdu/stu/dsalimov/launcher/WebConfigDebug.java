@@ -4,7 +4,7 @@ import kz.sdu.stu.dsalimov.util.AbstractWebConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
-@Configuration
+//@Configuration
 public class WebConfigDebug extends AbstractWebConfig {
 
     @Override
@@ -14,6 +14,6 @@ public class WebConfigDebug extends AbstractWebConfig {
                 .allowedHeaders("*")
                 .allowedMethods("*")
                 .exposedHeaders("Content-Disposition")
-                .allowCredentials(false);
+                .allowCredentials(true);
     }
 }

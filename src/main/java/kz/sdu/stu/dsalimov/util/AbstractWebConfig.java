@@ -54,11 +54,11 @@ public abstract class AbstractWebConfig extends WebMvcConfigurationSupport {
         WebFormatters.registerListObjectConverter(registry);
     }
 
-//    @Override
-//    @SuppressWarnings("NullableProblems")
-//    public RequestMappingHandlerMapping createRequestMappingHandlerMapping() {
-//        return new LocalRequestMappingHandlerMapping();
-//    }
+    @Override
+    @SuppressWarnings("NullableProblems")
+    public RequestMappingHandlerMapping createRequestMappingHandlerMapping() {
+        return new LocalRequestMappingHandlerMapping();
+    }
 
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {

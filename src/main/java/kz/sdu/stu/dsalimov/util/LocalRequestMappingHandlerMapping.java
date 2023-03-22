@@ -11,10 +11,10 @@ import java.lang.reflect.Method;
 
 public class LocalRequestMappingHandlerMapping extends RequestMappingHandlerMapping {
 
-    private static final String WEB_PATH_PREFIX = "web";
+    private static final String WEB_PATH_PREFIX = "api";
 
     @Override
-    protected void registerHandlerMethod(@NotNull Object handler, Method method, RequestMappingInfo mapping) {
+    protected void registerHandlerMethod(@NotNull Object handler, Method method, @NotNull RequestMappingInfo mapping) {
 
         Class<?> beanType = method.getDeclaringClass();
 
@@ -25,9 +25,10 @@ public class LocalRequestMappingHandlerMapping extends RequestMappingHandlerMapp
         super.registerHandlerMethod(handler, method, mapping);
     }
 
-    private RequestMappingInfo configRequestMapping(RequestMappingInfo mapping,
+    private RequestMappingInfo configRequestMapping(@NotNull RequestMappingInfo mapping,
                                                     @SuppressWarnings("SameParameterValue") String pathPrefix) {
 
+        assert mapping.getPatternsCondition() != null;
         PatternsRequestCondition apiPattern = new PatternsRequestCondition(pathPrefix)
                 .combine(mapping.getPatternsCondition());
 
