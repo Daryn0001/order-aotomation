@@ -9,8 +9,8 @@ public class WebConfigDebug extends AbstractWebConfig {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("api/**")
-                .allowedOrigins("http://localhost:3000", "https://order-automation-frontend-lake.vercel.app")
+        registry.addMapping("/**")
+                .allowedOrigins("*")
                 .allowedHeaders("*")
                 .allowedMethods("*")
                 .exposedHeaders("Content-Disposition")
