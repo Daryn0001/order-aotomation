@@ -17,6 +17,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+@CrossOrigin(origins = {"http://localhost:3000", "https://order-automation-frontend-lake.vercel.app"})
 @RequestMapping(value = "/api")
 public class TableController {
     private final TableRegister tableRegister;
