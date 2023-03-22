@@ -8,26 +8,26 @@ public class DbConfigForDebugServer implements DbConfig {
 
     @Override
     public String dbName() {
-        return "order_automation";
+        return "railway";
     }
 
     @Override
     public String host() {
-        return "dpg-cg8aikd269vf27fnk9s0-a";
+        return "containers-us-west-170.railway.app";
     }
 
     @Override
     public int port() {
-        return 5432;
+        return 7088;
     }
 
     @Override
     public String username() {
-        return "root";
+        return "postgres";
     }
 
     @Override
     public String password() {
-        return "t0RWbAvXlxrJZA8jRN6jJ5zQUUEI3Edy";
+        return "TEXLLKNXkb5adkLku66j";
     }
 }
