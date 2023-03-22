@@ -20,22 +20,20 @@ public class DishesController {
     private final DishRegister dishRegister;
 
     @GetMapping("/dishes")
-    public ResponseEntity<SuccessResponse> getDishes() {
+    public ResponseEntity< List<Dish>> getDishes() {
         List<Dish> dishes = this.dishRegister.getDishes();
 
         return new ResponseEntity<>(
-                new SuccessResponse(
                         dishes,
-                        MessageFormat.format("{0}, Result found", dishes.size())),
                 HttpStatus.OK
         );
     }
 
     @GetMapping("/getDish/{uuid}")
-    public ResponseEntity<SuccessResponse> findDishById(@PathVariable("uuid") String uuid) {
+    public ResponseEntity<Dish> findDishById(@PathVariable("uuid") String uuid) {
         Dish dish = this.dishRegister.findById(uuid);
         return new ResponseEntity<>(
-                new SuccessResponse(dish, ""),
+               dish,
                 HttpStatus.OK
         );
     }
