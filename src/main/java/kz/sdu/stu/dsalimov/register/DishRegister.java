@@ -13,5 +13,22 @@ public interface DishRegister {
 
     void delete(String uuid);
 
-    void update(Dish dish);
+    void update(String uuid, Dish dish);
+
+    void updateTitle(String uuid, String title);
+
+    void updateDescription(String uuid, String description);
+
+    void updatePicture(String uuid, String pictures);
+
+    void updateIngredients(String uuid, String ingredients);
+
+    void updateAmount(String uuid, int amount);
+
+    void updateNotes(String uuid, String notes);
+
+    void updateBody(String uuid, String body);
+
+    void updateCategoryId(String uuid, int category_id);
+
 }

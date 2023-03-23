@@ -19,30 +19,28 @@ import java.util.List;
 public class CategoryController {
     private final CategoryRegister categoryRegister;
 
-    @GetMapping("/getCategories")
-    public ResponseEntity<SuccessResponse> getCategories() {
+    @GetMapping("/categories")
+    public ResponseEntity<List<Category>> getCategories() {
         List<Category> categories = this.categoryRegister.getCategories();
         return new ResponseEntity<>(
-                new SuccessResponse(
-                        categories,
-                        MessageFormat.format("{0}, Result found", categories.size())),
+                categories,
                 HttpStatus.OK
         );
     }
 
-    @GetMapping("/getCategory/{id}")
-    public ResponseEntity<SuccessResponse> findDishById(@PathVariable("id") int id) {
+    @GetMapping("/get-category/{id}")
+    public ResponseEntity<Category> findDishById(@PathVariable("id") int id) {
         Category category = this.categoryRegister.findById(id);
         return new ResponseEntity<>(
-                new SuccessResponse(category, ""),
+                category,
                 HttpStatus.OK
         );
     }
 
     @PostMapping("/add/category")
-    public ResponseEntity<SuccessResponse> insertCategory(@RequestBody Category category){
+    public ResponseEntity<SuccessResponse> insertCategory(@RequestBody Category category) {
         System.out.println(" new category: " + category);
-        if ((category.getId() != 0) ) {
+        if ((category.getId() != 0)) {
             throw new RuntimeException("Крч айди должен быть пустым");
         }
 
@@ -50,10 +48,28 @@ public class CategoryController {
         return new ResponseEntity<>(new SuccessResponse(category, "new category added successfully"), HttpStatus.OK);
     }
 
-    @PostMapping("/deleteCategory/{id}")
+    @PostMapping("/delete-category/{id}")
     public void deleteCategory(@PathVariable int id) {
         this.categoryRegister.delete(id);
     }
 
+    @PostMapping("update-category/{id}")
+    public void update(@PathVariable int id, @RequestBody Category category) {
+        this.categoryRegister.update(id, category);
+    }
 
+    @PostMapping("update-category-parentCategoryId/{id}/{parentCategoryId}")
+    public void updateParentCategoryId(@PathVariable("id") int id, @PathVariable("parentCategoryId") int parentCategoryId) {
+        this.categoryRegister.updateParentCategoryId(id, parentCategoryId);
+    }
+
+    @PostMapping("update-category-name/{id}/{name}")
+    public void updateName(@PathVariable("id") int id, @PathVariable("name") String name) {
+        this.categoryRegister.updateName(id, name);
+    }
+
+    @PostMapping("update-category-description/{id}/{description}")
+    public void updateDescription(@PathVariable("id") int id, @PathVariable("description") String description) {
+        this.categoryRegister.updateDescription(id, description);
+    }
 }
