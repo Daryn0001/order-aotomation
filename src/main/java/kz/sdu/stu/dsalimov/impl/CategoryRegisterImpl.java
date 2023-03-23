@@ -34,7 +34,23 @@ public class CategoryRegisterImpl implements CategoryRegister {
     }
 
     @Override
-    public void update(Category order) {
-
+    public void update(int id, Category category) {
+        this.categoryDao.update(id, category);
     }
+
+    @Override
+    public void updateParentCategoryId(int id, int parentCategoryId) {
+        this.categoryDao.updateParentCategoryId(id, parentCategoryId);
+    }
+
+    @Override
+    public void updateName(int id, String name) {
+        this.categoryDao.updateName(id, name);
+    }
+
+    @Override
+    public void updateDescription(int id, String description) {
+        this.categoryDao.updateDescription(id, description);
+    }
+
 }

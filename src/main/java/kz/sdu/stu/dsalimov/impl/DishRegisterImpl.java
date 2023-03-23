@@ -37,7 +37,47 @@ public class DishRegisterImpl implements DishRegister {
     }
 
     @Override
-    public void update(Dish order) {
+    public void update(String uuid, Dish dish) {
+        this.dishDao.update(uuid, dish);
+    }
 
+    @Override
+    public void updateTitle(String uuid, String title) {
+        this.dishDao.updateTitle(uuid, title);
+    }
+
+    @Override
+    public void updateDescription(String uuid, String description) {
+        this.dishDao.updateDescription(uuid, description);
+    }
+
+    @Override
+    public void updatePicture(String uuid, String pictures) {
+        this.dishDao.updatePicture(uuid, pictures);
+    }
+
+    @Override
+    public void updateIngredients(String uuid, String ingredients) {
+        this.dishDao.updateIngredients(uuid, ingredients);
+    }
+
+    @Override
+    public void updateAmount(String uuid, int amount) {
+        this.dishDao.updateAmount(uuid, amount);
+    }
+
+    @Override
+    public void updateNotes(String uuid, String notes) {
+        this.dishDao.updateNote(uuid, notes);
+    }
+
+    @Override
+    public void updateBody(String uuid, String body) {
+        this.dishDao.updateBody(uuid, body);
+    }
+
+    @Override
+    public void updateCategoryId(String uuid, int category_id) {
+        this.dishDao.updateCategoryId(uuid, category_id);
     }
 }

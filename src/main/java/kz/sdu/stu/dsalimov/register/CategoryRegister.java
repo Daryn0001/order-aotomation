@@ -13,5 +13,12 @@ public interface CategoryRegister {
 
     void delete(int id);
 
-    void update(Category category);
+    void update(int id, Category category);
+
+    void updateParentCategoryId(int id, int parentCategoryId);
+
+    void updateName(int id, String name);
+
+    void updateDescription(int id, String description);
+
 }
