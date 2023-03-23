@@ -10,10 +10,10 @@ public class WebConfigDebug extends AbstractWebConfig {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
+                .allowedOrigins("http://localhost:3000", "https://order-automation-frontend-lake.vercel.app")
                 .allowedHeaders("*")
                 .allowedMethods("*")
                 .exposedHeaders("Content-Disposition")
-                .allowCredentials(false);
+                .allowCredentials(true);
     }
 }
