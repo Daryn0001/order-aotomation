@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.MessageFormat;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -20,11 +19,11 @@ public class DishesController {
     private final DishRegister dishRegister;
 
     @GetMapping("/dishes")
-    public ResponseEntity< List<Dish>> getDishes() {
+    public ResponseEntity<List<Dish>> getDishes() {
         List<Dish> dishes = this.dishRegister.getDishes();
 
         return new ResponseEntity<>(
-                        dishes,
+                dishes,
                 HttpStatus.OK
         );
     }
@@ -33,7 +32,7 @@ public class DishesController {
     public ResponseEntity<Dish> findDishById(@PathVariable("uuid") String uuid) {
         Dish dish = this.dishRegister.findById(uuid);
         return new ResponseEntity<>(
-               dish,
+                dish,
                 HttpStatus.OK
         );
     }
@@ -57,7 +56,7 @@ public class DishesController {
 
     @PostMapping("update-dish/{uuid}")
     public void updateDish(@RequestBody Dish dish, @PathVariable("uuid") String uuid) {
-        System.out.println("uuid: " + uuid + "\nupdate dish: " + dish );
+        System.out.println("uuid: " + uuid + "\nupdate dish: " + dish);
 
         this.dishRegister.update(uuid, dish);
     }
