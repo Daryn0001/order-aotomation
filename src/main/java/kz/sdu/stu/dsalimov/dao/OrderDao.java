@@ -13,15 +13,15 @@ import java.util.List;
 @Repository
 public interface OrderDao {
 // FIXME
-    @Select("SELECT * FROM order_details")
+    @Select("SELECT * FROM orders")
     List<OrderDetails> getTables();
 
-    @Select("select * from order_details where uuid = #{uuid}")
+    @Select("select * from orders where uuid = #{uuid}")
     OrderDetails findById(String uuid);
 
-    @Insert("INSERT INTO order_details (uuid, floor, internalId, temporaryKey) VALUES (#{uuid}, #{floor}, #{internalId}, #{temporaryKey})")
+    @Insert("INSERT INTO orders (uuid, floor, internalId, temporaryKey) VALUES (#{uuid}, #{floor}, #{internalId}, #{temporaryKey})")
     void insert(OrderDetails table);
 
-    @Delete("DELETE FROM order_details WHERE uuid = #{uuid}")
+    @Delete("DELETE FROM orders WHERE uuid = #{uuid}")
     void delete(String uuid);
 }

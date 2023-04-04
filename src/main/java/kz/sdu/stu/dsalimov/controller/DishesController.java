@@ -94,11 +94,6 @@ public class DishesController {
         this.dishRegister.updateNotes(uuid, note);
     }
 
-    @PostMapping("update-dish-body/{uuid}/{body}")
-    public void updateBody(@PathVariable("uuid") String uuid, @PathVariable("body") String body) {
-        this.dishRegister.updateBody(uuid, body);
-    }
-
     @PostMapping("update-dish-categoryId/{uuid}/{categoryId}")
     public void updateCategoryId(@PathVariable("uuid") String uuid, @PathVariable("categoryId") int categoryId) {
         this.dishRegister.updateCategoryId(uuid, categoryId);

@@ -11,3 +11,9 @@ CREATE TABLE IF NOT EXISTS dish
     category_id INT NOT NULL,
     PRIMARY KEY (uuid)
 );
+
+ALTER TABLE dish
+    ADD COLUMN IF NOT EXISTS is_active boolean NOT NULL default false,
+    ADD COLUMN IF NOT EXISTS amount INTEGER NOT NULL default '0',
+    ALTER COLUMN price TYPE VARCHAR(255),
+    DROP COLUMN IF EXISTS body;

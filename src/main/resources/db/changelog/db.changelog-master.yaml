@@ -1,15 +1,11 @@
 databaseChangeLog:
 
   - include:
-      file: 1_0/order_details.sql
+      file: 1_0/orders.sql
       relativeToChangelogFile: true
 
   - include:
-      file: 1_0/booking.sql
-      relativeToChangelogFile: true
-
-  - include:
-      file: 1_0/table_details.sql
+      file: 1_0/tables.sql
       relativeToChangelogFile: true
 
   - include:
@@ -22,6 +18,38 @@ databaseChangeLog:
 
   - include:
       file: 1_0/dish.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: 1_0/accesses.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: 1_0/branches.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: 1_0/companies.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: 1_0/elements.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: 1_0/events.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: 1_0/places.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: 1_0/roles.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: 1_0/users.sql
       relativeToChangelogFile: true
 
   - include:

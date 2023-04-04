@@ -27,8 +27,5 @@ public interface DishRegister {
 
     void updateNotes(String uuid, String notes);
 
-    void updateBody(String uuid, String body);
-
     void updateCategoryId(String uuid, int category_id);
-
 }

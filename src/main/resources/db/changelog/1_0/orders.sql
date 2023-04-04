@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS order_details
+CREATE TABLE IF NOT EXISTS orders
 (
     uuid         VARCHAR(254) NOT NULL,
     phone        VARCHAR(254) NOT NULL,
