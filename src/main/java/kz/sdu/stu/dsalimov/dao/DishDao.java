@@ -11,16 +11,18 @@ import java.util.List;
 public interface DishDao {
 
     @Select(//language=PostgreSQL
-            "SELECT uuid, title, description, pictures, ingredients, amount, note, category_id AS categoryId FROM dish")
+            "SELECT uuid, title, description, pictures, ingredients, amount, note, price, is_active as isActive," +
+                    " category_id AS categoryId FROM dish")
     List<Dish> getDishes();
 
     @Select(//language=PostgreSQL
-            "SELECT uuid, title, description, pictures, ingredients, amount, note, category_id AS categoryId FROM dish WHERE uuid = #{uuid}")
+            "SELECT uuid, title, description, pictures, ingredients, amount, note, price, is_active as isActive," +
+                    " category_id AS categoryId FROM dish WHERE uuid = #{uuid}")
     Dish findById(String uuid);
 
     @Insert(//language=PostgreSQL
-            "INSERT INTO dish (uuid, title, description, pictures, ingredients, amount, note, category_id)" +
-            " VALUES (#{uuid}, #{title}, #{description}, #{pictures}, #{ingredients}, #{amount}, #{notes}, #{categoryId})")
+            "INSERT INTO dish (uuid, title, description, pictures, ingredients, amount,  note, price, is_active,  category_id)" +
+                    " VALUES (#{uuid}, #{title}, #{description}, #{pictures}, #{ingredients}, #{amount}, #{note}, #{price}, #{isActive}, #{categoryId})")
     void insert(Dish dish);
 
     @Delete(//language=PostgreSQL
@@ -35,7 +37,9 @@ public interface DishDao {
             "pictures = #{dish.pictures}," +
             "ingredients = #{dish.ingredients}," +
             "amount = #{dish.amount}," +
-            "note = #{dish.notes}," +
+            "note = #{dish.note}," +
+            "price = #{dish.price}," +
+            "is_active = #{dish.isActive}," +
             "category_id = #{dish.categoryId} " +
             "WHERE uuid = #{dishUuid}")
     void update(String dishUuid, Dish dish);
@@ -61,8 +65,16 @@ public interface DishDao {
     void updateAmount(String uuid, int amount);
 
     @Update(//language=PostgreSQL
-            "UPDATE dish SET note = #{notes} WHERE uuid = #{uuid}")
-    void updateNote(String uuid, String notes);
+            "UPDATE dish SET note = #{note} WHERE uuid = #{uuid}")
+    void updateNote(String uuid, String note);
+
+    @Update(//language=PostgreSQL
+            "UPDATE dish SET price = #{price} WHERE uuid = #{uuid}")
+    void updatePrice(String uuid, int price);
+
+    @Update(//language=PostgreSQL
+            "UPDATE dish SET is_active = #{isActive} WHERE uuid = #{uuid}")
+    void updateIsActive(String uuid, boolean isActive);
 
     @Update(//language=PostgreSQL
             "UPDATE dish SET category_id = #{category_id} WHERE uuid = #{uuid}")

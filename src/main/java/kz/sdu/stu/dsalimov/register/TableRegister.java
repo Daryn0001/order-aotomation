@@ -1,17 +1,17 @@
 package kz.sdu.stu.dsalimov.register;
 
-import kz.sdu.stu.dsalimov.dto.db.TableDetails;
+import kz.sdu.stu.dsalimov.dto.db.Tables;
 
 import java.util.List;
 
 public interface TableRegister {
-    List<TableDetails> getTables();
+    List<Tables> getTables();
 
-    TableDetails findById(String uuid);
+    Tables findById(String uuid);
 
-    String insert(TableDetails tableDetails);
+    String insert(Tables tables);
 
     void delete(String uuid);
 
-    void update(TableDetails table);
+    void update(Tables table);
 }

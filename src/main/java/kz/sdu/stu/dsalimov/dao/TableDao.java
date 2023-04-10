@@ -1,10 +1,7 @@
 package kz.sdu.stu.dsalimov.dao;
 
-import kz.sdu.stu.dsalimov.dto.db.TableDetails;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import kz.sdu.stu.dsalimov.dto.db.Tables;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,15 +9,32 @@ import java.util.List;
 @Mapper
 @Repository
 public interface TableDao {
-    @Select("SELECT uuid, floor, internal_id as internalId, temporary_key as temporaryKey FROM tables")
-    List<TableDetails> getTables();
+    @Select(//language=PostgreSQL
+            "SELECT uuid, internal_id as internalId, temporary_key as temporaryKey, branch_uuid as branchUuid FROM tables")
+    List<Tables> findAll();
 
-    @Select("select * from tables where uuid = #{uuid}")
-    TableDetails findById(String uuid);
+    @Select(//language=PostgreSQL
+            "select * from tables where uuid = #{uuid}")
+    Tables findById(String uuid);
 
-    @Insert("INSERT INTO tables (uuid, floor, internal_id, temporary_key) VALUES (#{uuid}, #{floor}, #{internalId}, #{temporaryKey})")
-    String insert(TableDetails table);
+    @Insert(//language=PostgreSQL
+            "INSERT INTO tables (uuid,  internal_id, temporary_key, branch_uuid) VALUES (#{uuid}, #{internalId}, #{temporaryKey}, #{branchUuid})")
+    String insert(Tables table);
 
-    @Delete("DELETE FROM tables WHERE uuid = #{uuid}")
+    @Delete(//language=PostgreSQL
+            "DELETE FROM tables WHERE uuid = #{uuid}")
     boolean delete(String uuid);
+
+    @Update(//language=PostgreSQL
+            "UPDATE tables SET internal_id = #{internalId} WHERE uuid = #{uuid}")
+    void updateInternalId(@Param("uuid") String uuid, @Param("internalId") String internalId);
+
+    @Update(//language=PostgreSQL
+            "UPDATE tables SET temporary_key = #{temporaryKey} WHERE uuid = #{uuid}")
+    void updateTemporaryKey(@Param("uuid") String uuid, @Param("temporaryKey") String temporaryKey);
+
+    @Update(//language=PostgreSQL
+            "UPDATE tables SET branch_uuid = #{branchUuid} WHERE uuid = #{uuid}")
+    void updateBranchUuid(@Param("uuid") String uuid, @Param("branchUuid") String branchUuid);
+
 }

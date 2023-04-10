@@ -22,9 +22,11 @@ public class Dish {
 
     private int amount;
 
-    private String notes;
+    private String note;
 
-    private String body;
+    private String price;
+
+    private boolean isActive;
 
     private int categoryId;
 
