@@ -11,6 +11,6 @@ public class Event {
     private String uuid;
     private String title;
     private String description;
-    private String body;
+    private String image;
     private String placeUuid;
 }

@@ -18,11 +18,11 @@ public interface PlaceDao {
     Place findByUuid(String uuid);
 
     @Insert(//language=PostgreSQL
-            "INSERT INTO place (uuid, name, slug) VALUES (#{uuid}, #{name}, #{slug})")
+            "INSERT INTO place (uuid, type, size) VALUES (#{uuid}, #{type}, #{size})")
     void insert(Place place);
 
     @Update(//language=PostgreSQL
-            "UPDATE place SET name = #{name}, slug = #{slug} WHERE uuid = #{uuid}")
+            "UPDATE place SET type = #{type}, size = #{size} WHERE uuid = #{uuid}")
     void update(Place place);
 
     @Delete(//language=PostgreSQL
@@ -30,11 +30,11 @@ public interface PlaceDao {
     void deleteByUuid(String uuid);
 
     @Update(//language=PostgreSQL
-            "UPDATE place SET name = #{name} WHERE uuid = #{uuid}")
-    void updateName(@Param("uuid") String uuid, @Param("name") String name);
+            "UPDATE place SET type = #{type} WHERE uuid = #{uuid}")
+    void updateType(@Param("uuid") String uuid, @Param("type") String type);
 
     @Update(//language=PostgreSQL
-            "UPDATE place SET slug = #{slug} WHERE uuid = #{uuid}")
-    void updateSlug(@Param("uuid") String uuid, @Param("slug") String slug);
+            "UPDATE place SET size = #{size} WHERE uuid = #{uuid}")
+    void updateSize(@Param("uuid") String uuid, @Param("size") String size);
 
 }

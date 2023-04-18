@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TableRegisterImpl implements TableRegister {
@@ -25,6 +26,8 @@ public class TableRegisterImpl implements TableRegister {
 
     @Override
     public String insert(Tables tables) {
+        UUID uuid = UUID.randomUUID();
+        tables.setUuid(uuid.toString());
         return this.tableDao.insert(tables);
     }
 

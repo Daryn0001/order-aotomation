@@ -1,4 +1,4 @@
-package kz.sdu.stu.dsalimov.dto.db;
+package kz.sdu.stu.dsalimov.dto.to_client;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Place {
-    private String uuid;
-
-    private String type;
-
-    private String size;
+public class SlideItem {
+    private String title;
+    private String image;
 }
