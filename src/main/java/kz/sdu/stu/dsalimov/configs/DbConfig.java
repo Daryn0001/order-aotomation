@@ -13,7 +13,7 @@ public interface DbConfig {
     String password();
 
     default String url() {
-        return "jdbc:postgresql://dpg-cg8aikd269vf27fnk9s0-a.oregon-postgres.render.com" +  ":" + port() + "/" + dbName();
+        return "jdbc:postgresql://xzapKmzbpvZdcCGEQduYv5rC5mfpMWBm@dpg-ch1tbq5gk4qarqmdvs1g-a.frankfurt-postgres.render.comm" +  ":" + port() + "/" + dbName();
 //        return "jdbc:postgresql://" + host() + ":" + port() + "/" + dbName();
     }
 }
