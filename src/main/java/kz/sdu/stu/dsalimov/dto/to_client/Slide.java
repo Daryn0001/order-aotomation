@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Slide {
+    private String name;
     private String type;
     private String size;
     private List<SlideItem> list;

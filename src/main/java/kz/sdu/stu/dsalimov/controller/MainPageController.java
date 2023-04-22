@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainPageController {
     private final MainPageRegister mainPageRegister;
 
-    @GetMapping("get-body-data")
+    @GetMapping("get-slider-data")
     public ResponseEntity<MainPageBody> getBody() {
         var body = this.mainPageRegister.getBody();
 
