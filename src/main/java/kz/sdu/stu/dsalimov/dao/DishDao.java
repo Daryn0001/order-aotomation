@@ -11,7 +11,7 @@ import java.util.List;
 public interface DishDao {
 
     @Select(//language=PostgreSQL
-            "SELECT uuid, title, description, pictures, ingredients, amount, note, price, is_active as isActive," +
+            "SELECT uuid, title, description, pictures, ingredients, amount, note as notes, price, is_active as isActive," +
                     " category_id AS categoryId FROM dish")
     List<Dish> getDishes();
 
