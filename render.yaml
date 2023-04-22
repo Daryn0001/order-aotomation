@@ -1,26 +1,9 @@
 services:
-  order-automation:
-    type: docker
-    image: docker-spring-boot-postgres:latest
-    build:
-      context: .
-    env:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://pgdb:5432/order_automation
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=111
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-    ports:
-      - 1313/tcp
-    depends_on:
-      - pgdb
-
-  pgdb:
-    type: docker
-    image: postgres:13.10-alpine
-    env:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=111
-      - POSTGRES_HOST_AUTH_METHOD=trust
-      - POSTGRES_DB=order_automation
-    ports:
-      - 5432/tcp
+  - type: web
+    name: my-spring-boot-app
+    env: docker
+    buildCommand: docker-compose build
+    startCommand: docker-compose up -d
+    healthCheckPath: /actuator/health
+    numInstances: 1
+    port: 8080
