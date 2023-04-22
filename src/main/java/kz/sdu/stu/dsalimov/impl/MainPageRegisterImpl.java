@@ -44,8 +44,8 @@ public class MainPageRegisterImpl implements MainPageRegister {
                     slideItemList.add(new SlideItem(x.getUuid(), x.getTitle(), x.getImage(), x.getPlaceUuid()));
                 }
             });
-
-            data.addSlides(place.getName(), new Slide(place.getName(), place.getType(), place.getSize(), slideItemList));
+            String placeName = place.getName().trim().replace(' ', '_');
+            data.addSlides(placeName, new Slide(place.getName(), place.getType(), place.getSize(), slideItemList));
         }
         return data;
     }
