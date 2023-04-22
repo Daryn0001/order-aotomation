@@ -2,8 +2,23 @@ services:
   - type: web
     name: my-spring-boot-app
     env: docker
-    buildCommand: docker-compose build
-    startCommand: docker-compose up -d
+    dockerfile: ./Dockerfile
     healthCheckPath: /actuator/health
     numInstances: 1
-    port: 8080
+    port: 1313
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:postgresql://pgdb:5432/order_automation
+      - key: SPRING_DATASOURCE_USERNAME
+        value: root
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: 111
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update
+
+databases:
+  - name: pgdb
+    databaseName: order_automation
+    user: root
+    password: 111
+    version: 13.10
