@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS dish
     amount integer NOT NULL,
     notes TEXT NOT NULL,
     body TEXT NOT NULL,
+    price varchar(255) not null,
     category_id INT NOT NULL,
     PRIMARY KEY (uuid)
 );
