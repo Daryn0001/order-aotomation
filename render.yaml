@@ -2,7 +2,7 @@ services:
   - type: web
     name: my-spring-boot-app
     env: docker
-    dockerfile: ./Dockerfile
+    dockerfilePath: ./Dockerfile
     healthCheckPath: /actuator/health
     numInstances: 1
     port: 1313
