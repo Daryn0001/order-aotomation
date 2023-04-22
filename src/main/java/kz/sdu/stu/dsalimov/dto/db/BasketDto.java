@@ -3,14 +3,20 @@ package kz.sdu.stu.dsalimov.dto.db;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Access {
+@ToString
+public class BasketDto {
 
-    private int id;
-    private String branchUuid;
-    private String userUuid;
+    private String uuid;
+
+    private int amount;
+
+    private String dishUuid;
+
+    private String orderUuid;
 
 }

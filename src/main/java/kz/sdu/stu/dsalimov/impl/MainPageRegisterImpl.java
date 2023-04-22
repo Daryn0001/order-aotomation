@@ -37,22 +37,16 @@ public class MainPageRegisterImpl implements MainPageRegister {
         System.out.println("EventList: " + eventList);
         System.out.println("PlaceList: " + placeList);
 
-        var slideItemList = new ArrayList<SlideItem>();
-
-        eventList.forEach(x -> {
-            slideItemList.add(new SlideItem(x.getTitle(), x.getImage()));
-        });
-
         for (Place place : placeList) {
+            var slideItemList = new ArrayList<SlideItem>();
+            eventList.forEach(x -> {
+                if (x.getPlaceUuid().equals(place.getUuid())) {
+                    slideItemList.add(new SlideItem(x.getUuid(), x.getTitle(), x.getImage(), x.getPlaceUuid()));
+                }
+            });
+
             data.addSlides(place.getName(), new Slide(place.getName(), place.getType(), place.getSize(), slideItemList));
         }
-//        var p0 = placeList.get(0);
-//        var p1 = placeList.get(1);
-//        var featured = new Slide(p0.getName(), p0.getType(), p0.getSize(), slideItemList);
-//        var hot = new Slide(p1.getName(), p1.getType(), p1.getSize(), slideItemList);
-//
-//        data.addSlides("featured", featured);
-//        data.addSlides("hot", hot);
         return data;
     }
 }

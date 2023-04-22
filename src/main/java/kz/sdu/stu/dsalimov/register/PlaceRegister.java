@@ -12,7 +12,7 @@ public interface PlaceRegister {
 
     void insert(Place place);
 
-    void update(Place place);
+    void update(String uuid, Place place);
 
     void deleteByUuid(String uuid);
 

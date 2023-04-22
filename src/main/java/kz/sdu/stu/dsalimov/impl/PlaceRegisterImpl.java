@@ -32,8 +32,8 @@ public class PlaceRegisterImpl implements PlaceRegister {
     }
 
     @Override
-    public void update(Place place) {
-        this.placeDao.update(place);
+    public void update(String uuid, Place place) {
+        this.placeDao.update(uuid, place);
     }
 
     @Override

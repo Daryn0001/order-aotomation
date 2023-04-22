@@ -1,6 +1,6 @@
 package kz.sdu.stu.dsalimov.dao;
 
-import kz.sdu.stu.dsalimov.dto.db.Access;
+import kz.sdu.stu.dsalimov.dto.db.AccessDto;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -11,20 +11,20 @@ import java.util.List;
 public interface AccessDao {
     @Select(//language=PostgreSQL
             "SELECT * FROM accesses")
-    List<Access> findAll();
+    List<AccessDto> findAll();
 
     @Select(//language=PostgreSQL
             "SELECT * FROM accesses WHERE id = #{id}")
-    Access findById(int id);
+    AccessDto findById(int id);
 
     @Insert(//language=PostgreSQL
             "INSERT INTO accesses (branch_uuid, user_uuid) VALUES (#{branchUuid}, #{userUuid})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    void insert(Access access);
+    void insert(AccessDto access);
 
     @Update(//language=PostgreSQL
             "UPDATE accesses SET branch_uuid = #{branchUuid}, user_uuid = #{userUuid} WHERE id = #{id}")
-    void update(Access access);
+    void update(AccessDto access);
 
     @Delete(//language=PostgreSQL
             "DELETE FROM accesses WHERE id = #{id}")

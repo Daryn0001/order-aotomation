@@ -22,7 +22,7 @@ public interface EventDao {
     void insert(Event event);
 
     @Update(//language=PostgreSQL
-            "UPDATE event SET title = #{title}, description = #{description}, image = #{image}, places_uuid = #{placeUuid} WHERE uuid = #{event_uuid}")
+            "UPDATE event SET title = #{event.title}, description = #{event.description}, image = #{event.image}, places_uuid = #{event.placeUuid} WHERE uuid = #{event_uuid}")
     void update(String event_uuid, Event event);
 
     @Delete(//language=PostgreSQL

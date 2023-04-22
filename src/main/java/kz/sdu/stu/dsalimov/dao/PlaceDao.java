@@ -22,8 +22,8 @@ public interface PlaceDao {
     void insert(Place place);
 
     @Update(//language=PostgreSQL
-            "UPDATE place SET type = #{type}, size = #{size}, name = #{name} WHERE uuid = #{uuid}")
-    void update(Place place);
+            "UPDATE place SET type = #{place.type}, size = #{place.size}, name = #{place.name} WHERE uuid = #{place_uuid}")
+    void update(String place_uuid, Place place);
 
     @Delete(//language=PostgreSQL
             "DELETE FROM place WHERE uuid = #{uuid}")
