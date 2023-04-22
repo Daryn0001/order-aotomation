@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 public class Place {
     private String uuid;
 
+    private String name;
+
     private String type;
 
     private String size;

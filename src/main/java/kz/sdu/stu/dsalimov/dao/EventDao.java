@@ -22,8 +22,8 @@ public interface EventDao {
     void insert(Event event);
 
     @Update(//language=PostgreSQL
-            "UPDATE event SET title = #{title}, description = #{description}, image = #{image}, places_uuid = #{placeUuid} WHERE uuid = #{uuid}")
-    void update(Event event);
+            "UPDATE event SET title = #{title}, description = #{description}, image = #{image}, places_uuid = #{placeUuid} WHERE uuid = #{event_uuid}")
+    void update(String event_uuid, Event event);
 
     @Delete(//language=PostgreSQL
             "DELETE FROM event WHERE uuid = #{uuid}")

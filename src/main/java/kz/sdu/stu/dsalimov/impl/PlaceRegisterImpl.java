@@ -50,4 +50,10 @@ public class PlaceRegisterImpl implements PlaceRegister {
     public void updateSize(String uuid, String size) {
         this.placeDao.updateSize(uuid, size);
     }
+
+    @Override
+    public void updateName(String uuid, String name) {
+
+        this.placeDao.updateName(uuid, name);
+    }
 }

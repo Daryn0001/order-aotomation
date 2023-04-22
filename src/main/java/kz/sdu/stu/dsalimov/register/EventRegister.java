@@ -1,7 +1,6 @@
 package kz.sdu.stu.dsalimov.register;
 
 import kz.sdu.stu.dsalimov.dto.db.Event;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ public interface EventRegister {
 
     void insert(Event event);
 
-    void update(Event event);
+    void update(String uuid, Event event);
 
     void deleteByUuid(String uuid);
 

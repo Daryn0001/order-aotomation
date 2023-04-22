@@ -20,4 +20,5 @@ public interface PlaceRegister {
 
     void updateSize( String uuid, String size);
 
+    void updateName(String uuid, String name);
 }

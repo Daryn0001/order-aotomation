@@ -32,8 +32,8 @@ public class EventRegisterImpl implements EventRegister {
     }
 
     @Override
-    public void update(Event event) {
-        this.eventDao.update(event);
+    public void update(String uuid, Event event) {
+        this.eventDao.update(uuid, event);
     }
 
     @Override

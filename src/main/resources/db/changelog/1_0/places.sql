@@ -6,3 +6,6 @@ CREATE TABLE IF NOT EXISTS place
     CONSTRAINT unq_places_uuid UNIQUE (uuid),
     CONSTRAINT pk_places PRIMARY KEY (uuid)
 );
+
+ALTER TABLE place
+ADD COLUMN IF NOT EXISTS name varchar NOT NULL default '';
