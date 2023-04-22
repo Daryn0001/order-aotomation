@@ -1,4 +1,7 @@
 databaseChangeLog:
+  - include:
+      file: 1_0/drop-database.sql
+      relativeToChangelogFile: true
 
   - include:
       file: 1_0/drop-changelog-tables.sql
