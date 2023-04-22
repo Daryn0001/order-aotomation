@@ -1,6 +1,5 @@
 package kz.sdu.stu.dsalimov.controller;
 
-import kz.sdu.stu.dsalimov.dto.db.TableDetails;
 import kz.sdu.stu.dsalimov.register.TableRegister;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
+import kz.sdu.stu.dsalimov.dto.db.Tables;
+import kz.sdu.stu.dsalimov.dto.response.SuccessResponse;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -20,8 +21,8 @@ public class TableController {
     private final TableRegister tableRegister;
 
     @GetMapping("/tables")
-    public ResponseEntity<List<TableDetails>> getTables() {
-        List<TableDetails> tables = this.tableRegister.getTables();
+    public ResponseEntity<List<Tables>> getTables() {
+        List<Tables> tables = this.tableRegister.getTables();
         System.out.println(" get mappings tb: " + tables);
         return new ResponseEntity<>(
                 tables,
@@ -36,7 +37,7 @@ public class TableController {
     }
 
     @GetMapping("/getTable/{uuid}")
-    public @ResponseBody ResponseEntity<TableDetails> getTableById(@PathVariable("uuid") String uuid) {
+    public @ResponseBody ResponseEntity<Tables> getTableById(@PathVariable("uuid") String uuid) {
         System.out.println(" found by id: " + this.tableRegister.findById(uuid));
         return new ResponseEntity<>(
                 this.tableRegister.findById(uuid),
@@ -45,12 +46,12 @@ public class TableController {
     }
 
     @GetMapping("/table/{uuid}")
-    public ResponseEntity<TableDetails> getTable(@PathVariable("uuid") String uuid) {
+    public ResponseEntity<Tables> getTable(@PathVariable("uuid") String uuid) {
         return new ResponseEntity<>(this.tableRegister.findById(uuid), HttpStatus.OK);
     }
 
     @PostMapping("/add/table")
-    public void insertTable(@RequestBody TableDetails table) {
+    public void insertTable(@RequestBody Tables table) {
 
         System.out.println(" post mappings");
         if (!ObjectUtils.isEmpty(table.getUuid())) {

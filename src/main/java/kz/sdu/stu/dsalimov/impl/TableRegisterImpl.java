@@ -1,12 +1,13 @@
 package kz.sdu.stu.dsalimov.impl;
 
 import kz.sdu.stu.dsalimov.dao.TableDao;
-import kz.sdu.stu.dsalimov.dto.db.TableDetails;
+import kz.sdu.stu.dsalimov.dto.db.Tables;
 import kz.sdu.stu.dsalimov.register.TableRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TableRegisterImpl implements TableRegister {
@@ -14,18 +15,20 @@ public class TableRegisterImpl implements TableRegister {
     private TableDao tableDao;
 
     @Override
-    public List<TableDetails> getTables() {
-        return this.tableDao.getTables();
+    public List<Tables> getTables() {
+        return this.tableDao.findAll();
     }
 
     @Override
-    public TableDetails findById(String uuid) {
+    public Tables findById(String uuid) {
         return this.tableDao.findById(uuid);
     }
 
     @Override
-    public String insert(TableDetails tableDetails) {
-        return this.tableDao.insert(tableDetails);
+    public String insert(Tables tables) {
+        UUID uuid = UUID.randomUUID();
+        tables.setUuid(uuid.toString());
+        return this.tableDao.insert(tables);
     }
 
     @Override
@@ -34,7 +37,7 @@ public class TableRegisterImpl implements TableRegister {
     }
 
     @Override
-    public void update(TableDetails table) {
+    public void update(Tables table) {
         System.out.println(" Update request table: " + table);
     }
 }

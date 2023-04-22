@@ -72,11 +72,6 @@ public class DishRegisterImpl implements DishRegister {
     }
 
     @Override
-    public void updateBody(String uuid, String body) {
-        this.dishDao.updateBody(uuid, body);
-    }
-
-    @Override
     public void updateCategoryId(String uuid, int category_id) {
         this.dishDao.updateCategoryId(uuid, category_id);
     }

@@ -1,19 +1,19 @@
 package kz.sdu.stu.dsalimov.register;
 
-import kz.sdu.stu.dsalimov.dto.db.OrderDetails;
+import kz.sdu.stu.dsalimov.dto.db.Orders;
 
 import java.util.List;
 
 public interface OrderRegister {
 
-    List<OrderDetails> getOrders();
+    List<Orders> getOrders();
 
-    OrderDetails findById(String uuid);
+    Orders findById(String uuid);
 
-    String insert(OrderDetails order);
+    String insert(Orders order);
 
     void delete(String uuid);
 
-    void update(OrderDetails order);
+    void update(Orders order);
 
 }
