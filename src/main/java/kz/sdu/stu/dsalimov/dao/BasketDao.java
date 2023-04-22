@@ -1,6 +1,6 @@
 package kz.sdu.stu.dsalimov.dao;
 
-import kz.sdu.stu.dsalimov.dto.db.Basket;
+import kz.sdu.stu.dsalimov.dto.db.BasketDto;
 import kz.sdu.stu.dsalimov.dto.db.Tables;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -20,7 +20,7 @@ public interface BasketDao {
 
     @Insert(//language=PostgreSQL
             "INSERT INTO basket (uuid, amount, dish_uuid, order_uuid) VALUES (#{uuid}, #{amount}, #{dishUuid}, #{orderUuid})")
-    void insert(Basket basket);
+    void insert(BasketDto basketDto);
 
     @Delete(//language=PostgreSQL
             "DELETE FROM basket WHERE uuid = #{uuid}")

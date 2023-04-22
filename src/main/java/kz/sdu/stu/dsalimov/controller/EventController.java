@@ -1,6 +1,5 @@
 package kz.sdu.stu.dsalimov.controller;
 
-import kz.sdu.stu.dsalimov.dto.db.Category;
 import kz.sdu.stu.dsalimov.dto.db.Event;
 import kz.sdu.stu.dsalimov.dto.response.SuccessResponse;
 import kz.sdu.stu.dsalimov.register.EventRegister;
@@ -18,7 +17,7 @@ import java.util.List;
 @CrossOrigin(origins = {"http://localhost:3000", "https://order-automation-frontend-lake.vercel.app"})
 @RequestMapping(value = "/api")
 public class EventController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(BaseControllerAdvice.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EventController.class);
     private final EventRegister eventRegister;
 
     @GetMapping("/get-event-list")
@@ -57,6 +56,8 @@ public class EventController {
 
     @PostMapping("/update-event/{uuid}")
     public void update(@PathVariable String uuid, @RequestBody Event event) {
+        LOGGER.info("fdj7BeT4u48 :: uuid: " + uuid);
+        LOGGER.info("vLT2hz6ajglu :: event: " + event);
         this.eventRegister.update(uuid, event);
     }
 

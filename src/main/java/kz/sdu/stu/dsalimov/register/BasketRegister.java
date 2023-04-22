@@ -1,18 +1,18 @@
 package kz.sdu.stu.dsalimov.register;
 
-import kz.sdu.stu.dsalimov.dto.db.Basket;
+import kz.sdu.stu.dsalimov.dto.db.BasketDto;
 
 import java.util.List;
 
 public interface BasketRegister {
 
-    List<Basket> getBaskets();
+    List<BasketDto> getBaskets();
 
-    Basket findById(String uuid);
+    BasketDto findById(String uuid);
 
-    String insert(Basket order);
+    String insert(BasketDto order);
 
     void delete(String uuid);
 
-    void update(Basket basket);
+    void update(BasketDto basketDto);
 }

@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SlideItem {
+    private String uuid;
     private String title;
     private String image;
+    private String placeUuid;
 }
