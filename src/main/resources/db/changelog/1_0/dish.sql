@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS dish
     pictures TEXT NOT NULL,
     ingredients TEXT NOT NULL,
     amount integer NOT NULL,
-    notes TEXT NOT NULL,
+    note TEXT NOT NULL,
+    price VARCHAR(255) NOT NULL,
     body TEXT NOT NULL,
     category_id INT NOT NULL,
     PRIMARY KEY (uuid)
