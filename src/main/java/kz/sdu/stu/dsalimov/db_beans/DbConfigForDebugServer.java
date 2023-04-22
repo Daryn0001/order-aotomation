@@ -8,12 +8,12 @@ public class DbConfigForDebugServer implements DbConfig {
 
     @Override
     public String dbName() {
-        return "order_automation_el6c";
+        return "order_automation";
     }
 
     @Override
     public String host() {
-        return "dpg-ch1tbq5gk4qarqmdvs1g-a";
+        return "localhost";
     }
 
     @Override
@@ -28,6 +28,6 @@ public class DbConfigForDebugServer implements DbConfig {
 
     @Override
     public String password() {
-        return "xzapKmzbpvZdcCGEQduYv5rC5mfpMWBm";
+        return "111";
     }
 }
