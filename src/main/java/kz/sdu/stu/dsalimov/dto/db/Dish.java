@@ -22,7 +22,7 @@ public class Dish {
 
     private int amount;
 
-    private String note;
+    private String notes;
 
     private String price;
 
