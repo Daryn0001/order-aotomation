@@ -5,3 +5,7 @@ CREATE TABLE IF NOT EXISTS category
     name VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL
 );
+
+ALTER TABLE category
+    ALTER COLUMN description SET DEFAULT NULL,
+    ALTER COLUMN name SET DEFAULT NULL;

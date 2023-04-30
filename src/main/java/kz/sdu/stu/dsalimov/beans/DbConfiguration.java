@@ -6,7 +6,6 @@ import kz.sdu.stu.dsalimov.configs.DbConfig;
 import kz.sdu.stu.dsalimov.dao.BeanConfigDao;
 import kz.sdu.stu.dsalimov.db_beans.DbConfigForDebugServer;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
