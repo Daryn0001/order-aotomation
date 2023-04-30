@@ -39,7 +39,7 @@ public interface BranchDao {
 
     @Update(//language=PostgreSQL
             "UPDATE branches SET admin_uuid = #{adminUuid} WHERE uuid = #{uuid}")
-    void updateAdminUuid(@Param("uuid") String uuid, @Param("adminUuid") String adminUuid);
+    void updateAdminUuid(@Param("uuid") String uuid, @Param("adminUuid") Long adminUuid);
 
     @Update(//language=PostgreSQL
             "UPDATE branches SET company_id = #{companyId} WHERE uuid = #{uuid}")

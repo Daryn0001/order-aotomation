@@ -10,15 +10,15 @@ import java.util.List;
 @Repository
 public interface PlaceDao {
     @Select(//language=PostgreSQL
-            "SELECT * FROM place")
+            "SELECT  uuid, type, name, size, branch_uuid as branchUuid FROM place")
     List<Place> findAll();
 
     @Select(//language=PostgreSQL
-            "SELECT * FROM place WHERE uuid = #{uuid}")
+            "SELECT uuid, type, name, size, branch_uuid as branchUuid FROM place WHERE uuid = #{uuid}")
     Place findByUuid(String uuid);
 
     @Insert(//language=PostgreSQL
-            "INSERT INTO place (uuid, type, name, size) VALUES (#{uuid}, #{type}, #{name}, #{size})")
+            "INSERT INTO place (uuid, type, name, size, branch_uuid) VALUES (#{uuid}, #{type}, #{name}, #{size}, #{branchUuid})")
     void insert(Place place);
 
     @Update(//language=PostgreSQL

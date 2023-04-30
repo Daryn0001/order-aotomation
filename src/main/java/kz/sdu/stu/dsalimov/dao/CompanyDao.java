@@ -9,11 +9,11 @@ import org.springframework.stereotype.Repository;
 public interface CompanyDao {
 
     @Select(//language=PostgreSQL
-            "SELECT uuid, name, description, address, phone, owner_uuid as ownerUuid FROM companies WHERE uuid = #{uuid}")
+            "SELECT uuid, name, description, address, phone, owner_uuid as ownerId FROM companies WHERE uuid = #{uuid}")
     Company findById(String uuid);
 
     @Insert(//language=PostgreSQL
-            "INSERT INTO companies (uuid, name, description, address, phone, owner_uuid) VALUES (#{uuid}, #{name}, #{description}, #{address}, #{phone}, #{ownerUuid})")
+            "INSERT INTO companies (uuid, name, description, address, phone, owner_uuid) VALUES (#{uuid}, #{name}, #{description}, #{address}, #{phone}, #{ownerId})")
     void insert(Company company);
 
     @Delete(//language=PostgreSQL
@@ -37,6 +37,6 @@ public interface CompanyDao {
     void updatePhone(String uuid, String phone);
 
     @Update(//language=PostgreSQL
-            "UPDATE companies SET owner_uuid = #{ownerUuid} WHERE uuid = #{uuid}")
-    void updateOwnerUuid(String uuid, String ownerUuid);
+            "UPDATE companies SET owner_uuid = #{ownerId} WHERE uuid = #{uuid}")
+    void updateOwnerUuid(String uuid, Long ownerId);
 }

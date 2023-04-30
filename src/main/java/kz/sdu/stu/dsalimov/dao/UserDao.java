@@ -14,39 +14,35 @@ public interface UserDao {
     List<User> findAll();
 
     @Select(//language=PostgreSQL
-            "SELECT * FROM users WHERE uuid = #{uuid}")
-    User findByUuid(String uuid);
+            "SELECT * FROM users WHERE id = #{id}")
+    User findByUuid(Long id);
 
     @Insert(//language=PostgreSQL
-            "INSERT INTO users (uuid, fullname, phone, password, email, role_uuid) VALUES (#{uuid}, #{fullname}, #{phone}, #{password}, #{email}, #{roleUuid})")
+            "INSERT INTO users (fullname, phone, password, email, remember_token) VALUES (#{fullname}, #{phone}, #{password}, #{email}, #{rememberToken})")
     void insert(User user);
 
     @Update(//language=PostgreSQL
-            "UPDATE users SET fullname = #{fullname}, phone = #{phone}, password = #{password}, email = #{email}, role_uuid = #{roleUuid} WHERE uuid = #{uuid}")
+            "UPDATE users SET fullname = #{fullname}, phone = #{phone}, password = #{password}, email = #{email} WHERE id = #{id}")
     void update(User user);
 
     @Delete(//language=PostgreSQL
-            "DELETE FROM users WHERE uuid = #{uuid}")
-    void deleteByUuid(String uuid);
+            "DELETE FROM users WHERE id = #{id}")
+    void deleteByUuid(Long id);
 
     @Update(//language=PostgreSQL
-            "UPDATE users SET fullname = #{fullname} WHERE uuid = #{uuid}")
-    void updateFullname(@Param("uuid") String uuid, @Param("fullname") String fullname);
+            "UPDATE users SET fullname = #{fullname} WHERE id = #{id}")
+    void updateFullname(@Param("id") Long id, @Param("fullname") String fullname);
 
     @Update(//language=PostgreSQL
-            "UPDATE users SET phone = #{phone} WHERE uuid = #{uuid}")
-    void updatePhone(@Param("uuid") String uuid, @Param("phone") String phone);
+            "UPDATE users SET phone = #{phone} WHERE id = #{id}")
+    void updatePhone(@Param("id") Long id, @Param("phone") String phone);
 
     @Update(//language=PostgreSQL
-            "UPDATE users SET password = #{password} WHERE uuid = #{uuid}")
-    void updatePassword(@Param("uuid") String uuid, @Param("password") String password);
+            "UPDATE users SET password = #{password} WHERE id = #{id}")
+    void updatePassword(@Param("id") Long id, @Param("password") String password);
 
     @Update(//language=PostgreSQL
-            "UPDATE users SET email = #{email} WHERE uuid = #{uuid}")
-    void updateEmail(@Param("uuid") String uuid, @Param("email") String email);
-
-    @Update(//language=PostgreSQL
-            "UPDATE users SET role_uuid = #{roleUuid} WHERE uuid = #{uuid}")
-    void updateRoleUuid(@Param("uuid") String uuid, @Param("roleUuid") String roleUuid);
+            "UPDATE users SET email = #{email} WHERE id = #{id}")
+    void updateEmail(@Param("id") Long id, @Param("email") String email);
 
 }
