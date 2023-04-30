@@ -1,11 +1,16 @@
 package kz.sdu.stu.dsalimov.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import kz.sdu.stu.dsalimov.dao.EventDao;
 import kz.sdu.stu.dsalimov.dto.db.Event;
 import kz.sdu.stu.dsalimov.register.EventRegister;
+import org.postgresql.util.PGobject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,7 +33,26 @@ public class EventRegisterImpl implements EventRegister {
     public void insert(Event event) {
         UUID uuid = UUID.randomUUID();
         event.setUuid(uuid.toString());
-        this.eventDao.insert(event);
+
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ArrayNode imageJsonArray = objectMapper.createArrayNode();
+        imageJsonArray.add(event.getImage());
+
+        System.out.println("TXGRsJ0t :: json: " + imageJsonArray);
+
+
+        PGobject jsonbObject = new PGobject();
+        jsonbObject.setType("jsonb");
+        try {
+            jsonbObject.setValue(imageJsonArray.toString());
+
+            System.out.println("NSbMEtIkb :: jsonb: " + jsonbObject);
+           var ll =  this.eventDao.insert(event, jsonbObject);
+            System.out.println("Ee29MiGUKiU0 :: LL: " + ll);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

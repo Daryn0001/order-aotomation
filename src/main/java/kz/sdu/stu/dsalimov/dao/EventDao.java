@@ -2,6 +2,7 @@ package kz.sdu.stu.dsalimov.dao;
 
 import kz.sdu.stu.dsalimov.dto.db.Event;
 import org.apache.ibatis.annotations.*;
+import org.postgresql.util.PGobject;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,12 +15,12 @@ public interface EventDao {
     List<Event> findAll();
 
     @Select(//language=PostgreSQL
-            "SELECT uuid, title, description, image, places_uuid as placesUuid FROM event WHERE uuid = #{uuid}")
+            "SELECT uuid, title, description, image, places_uuid as placeUuid FROM event WHERE uuid = #{uuid}")
     Event findByUuid(String uuid);
 
     @Insert(//language=PostgreSQL
-            "INSERT INTO event (uuid, title, description, image, places_uuid) VALUES (#{uuid}, #{title}, #{description}, #{image}, #{placeUuid})")
-    void insert(Event event);
+            "INSERT INTO event (uuid, title, description, image, places_uuid) VALUES (#{event.uuid}, #{event.title}, #{event.description}, #{imageJsonb}, #{event.placeUuid})")
+    boolean insert(Event event, PGobject imageJsonb);
 
     @Update(//language=PostgreSQL
             "UPDATE event SET title = #{event.title}, description = #{event.description}, image = #{event.image}, places_uuid = #{event.placeUuid} WHERE uuid = #{event_uuid}")
