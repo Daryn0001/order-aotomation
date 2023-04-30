@@ -8,3 +8,13 @@ CREATE TABLE IF NOT EXISTS branches
     CONSTRAINT unq_branches_uuid UNIQUE (uuid),
     CONSTRAINT pk_branches PRIMARY KEY (uuid)
 );
+
+ALTER TABLE branches
+    ALTER COLUMN admin_uuid TYPE bigint USING admin_uuid::bigint;
+
+
+ALTER TABLE branches
+    ADD COLUMN IF NOT EXISTS
+        created_at timestamp NULL DEFAULT NULL,
+    ADD COLUMN IF NOT EXISTS
+        updated_at timestamp NULL DEFAULT NULL;

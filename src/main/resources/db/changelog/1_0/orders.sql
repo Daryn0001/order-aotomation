@@ -8,3 +8,11 @@ CREATE TABLE IF NOT EXISTS orders
     price        INT          NOT NULL,
     PRIMARY KEY (uuid)
 );
+
+ALTER TABLE orders
+    DROP COLUMN IF EXISTS booking_uuid,
+
+    ADD COLUMN IF NOT EXISTS
+        created_at timestamp NULL DEFAULT NULL,
+    ADD COLUMN IF NOT EXISTS
+        updated_at timestamp NULL DEFAULT NULL;

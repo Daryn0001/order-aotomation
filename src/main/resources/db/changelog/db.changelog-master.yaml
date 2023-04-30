@@ -1,8 +1,8 @@
 databaseChangeLog:
 
-#  - include:
-#      file: 1_0/drop-changelog-tables.sql
-#      relativeToChangelogFile: true
+  - include:
+      file: 1_0/truncate-changelog-tables.sql
+      relativeToChangelogFile: true
 
   - include:
       file: 1_0/orders.sql
@@ -54,6 +54,34 @@ databaseChangeLog:
 
   - include:
       file: 1_0/users.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: 1_0/migrations.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: 1_0/model_has_permissions.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: 1_0/model_has_roles.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: 1_0/password_reset_tokens.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: 1_0/permissions.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: 1_0/personal_access_tokens.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: 1_0/role_has_permissions.sql
       relativeToChangelogFile: true
 
   - include:

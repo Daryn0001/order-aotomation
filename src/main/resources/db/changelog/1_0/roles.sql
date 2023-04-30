@@ -1,7 +1,9 @@
 CREATE TABLE IF NOT EXISTS roles
 (
-    uuid  varchar NOT NULL,
-    title varchar NOT NULL,
-    CONSTRAINT unq_roles_uuid UNIQUE (uuid),
-    CONSTRAINT pk_roles PRIMARY KEY (uuid)
+    id         bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name       varchar   NOT NULL,
+    guard_name varchar   NOT NULL,
+    created_at timestamp NULL DEFAULT NOW(),
+    updated_at timestamp NULL DEFAULT NULL,
+    CONSTRAINT unq_roles_uuid UNIQUE (id)
 );

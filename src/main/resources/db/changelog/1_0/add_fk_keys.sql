@@ -37,18 +37,11 @@ ALTER TABLE elements
     ADD CONSTRAINT Elements_event_uuid_Events_uuid FOREIGN KEY (event_uuid) REFERENCES event (uuid);
 
 
-ALTER TABLE users
-    DROP CONSTRAINT IF EXISTS fk_users_roles;
-
-ALTER TABLE users
-    ADD CONSTRAINT fk_users_roles FOREIGN KEY (role_uuid) REFERENCES roles (uuid);
-
-
 ALTER TABLE companies
     DROP CONSTRAINT IF EXISTS fk_companies_users;
 
 ALTER TABLE companies
-    ADD CONSTRAINT fk_companies_users FOREIGN KEY (owner_uuid) REFERENCES users (uuid);
+    ADD CONSTRAINT fk_companies_users FOREIGN KEY (owner_uuid) REFERENCES users (id);
 
 
 
@@ -64,7 +57,7 @@ ALTER TABLE accesses
 
 ALTER TABLE accesses
     ADD CONSTRAINT fk_accesses_branches FOREIGN KEY (branch_uuid) REFERENCES branches (uuid),
-    ADD CONSTRAINT fk_accesses_users FOREIGN KEY (user_uuid) REFERENCES users (uuid);
+    ADD CONSTRAINT fk_accesses_users FOREIGN KEY (user_id) REFERENCES users (id);
 
 
 ALTER TABLE branches
@@ -73,4 +66,39 @@ ALTER TABLE branches
 
 ALTER TABLE branches
     ADD CONSTRAINT fk_branches_companies FOREIGN KEY (company_id) REFERENCES companies (uuid),
-    ADD CONSTRAINT fk_branches_users FOREIGN KEY (admin_uuid) REFERENCES users (uuid);
+    ADD CONSTRAINT fk_branches_users FOREIGN KEY (admin_uuid) REFERENCES users (id);
+
+
+ALTER TABLE model_has_permissions
+    DROP CONSTRAINT IF EXISTS model_has_permissions_permission_id_foreign;
+
+ALTER TABLE model_has_permissions
+    ADD CONSTRAINT model_has_permissions_permission_id_foreign
+        FOREIGN KEY (permission_id) REFERENCES permissions (id) ON DELETE CASCADE;
+
+
+ALTER TABLE model_has_roles
+    DROP CONSTRAINT IF EXISTS model_has_roles_role_id_foreign;
+
+ALTER TABLE model_has_roles
+    ADD CONSTRAINT model_has_roles_role_id_foreign
+        FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE;
+
+
+ALTER TABLE place
+    DROP CONSTRAINT IF EXISTS places_branch_uuid_foreign;
+
+ALTER TABLE place
+    ADD CONSTRAINT places_branch_uuid_foreign
+        FOREIGN KEY (branch_uuid) REFERENCES branches (uuid) ON DELETE CASCADE;
+
+
+ALTER TABLE role_has_permissions
+    DROP CONSTRAINT IF EXISTS role_has_permissions_permission_id_foreign,
+    DROP CONSTRAINT IF EXISTS role_has_permissions_role_id_foreign;
+
+ALTER TABLE role_has_permissions
+    ADD CONSTRAINT role_has_permissions_permission_id_foreign
+        FOREIGN KEY (permission_id) REFERENCES permissions (id) ON DELETE CASCADE,
+    ADD CONSTRAINT role_has_permissions_role_id_foreign
+        FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE;
