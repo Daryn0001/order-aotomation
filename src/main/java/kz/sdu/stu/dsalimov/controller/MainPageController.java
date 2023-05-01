@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainPageController {
     private final MainPageRegister mainPageRegister;
 
-    @GetMapping("get-slider-data")
+    @GetMapping("/get-slider-data")
     public ResponseEntity<MainPageBody> getBody() {
         var body = this.mainPageRegister.getBody();
 
@@ -29,7 +29,7 @@ public class MainPageController {
         return new ResponseEntity<>(body,  HttpStatus.OK);
     }
 
-    @GetMapping("get-header-data")
+    @GetMapping("/get-header-data")
     public ResponseEntity<MainPageHeader> getHeader() {
         var header = this.mainPageRegister.getHeader();
 

@@ -2,6 +2,7 @@ package kz.sdu.stu.dsalimov.dao;
 
 import kz.sdu.stu.dsalimov.dto.db.Dish;
 import org.apache.ibatis.annotations.*;
+import org.postgresql.util.PGobject;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,10 +21,15 @@ public interface DishDao {
                     " category_id AS categoryId FROM dish WHERE uuid = #{uuid}")
     Dish findById(String uuid);
 
+    @Select(//language=PostgreSQL
+            "with dishUuid as (select dish_uuid from elements join event e on e.uuid = elements.event_uuid where event_uuid = #{eventUuid})\n" +
+                    "select * from dish where uuid in  (select * from dishUuid) ; ")
+    List<Dish> getDishesByEvent(String eventUuid);
+
     @Insert(//language=PostgreSQL
             "INSERT INTO dish (uuid, title, description, pictures, ingredients, amount,  notes, price, is_active,  category_id)" +
-                    " VALUES (#{uuid}, #{title}, #{description}, #{pictures}, #{ingredients}, #{amount}, #{notes}, #{price}, #{isActive}, #{categoryId})")
-    void insert(Dish dish);
+                    " VALUES (#{dish.uuid}, #{dish.title}, #{dish.description}, #{pictures}, #{dishIngredients}, #{dish.amount}, #{dish.notes}, #{dish.price}, #{dish.isActive}, #{dish.categoryId})")
+    void insert(Dish dish,  PGobject dishIngredients, PGobject pictures);
 
     @Delete(//language=PostgreSQL
             "DELETE FROM dish WHERE uuid = #{uuid}")

@@ -9,6 +9,8 @@ public interface DishRegister {
 
     Dish findById(String uuid);
 
+    List<Dish> getDishesByEvent(String uuid);
+
     void insert(Dish dish);
 
     void delete(String uuid);

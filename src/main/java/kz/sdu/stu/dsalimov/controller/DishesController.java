@@ -10,6 +10,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @RequiredArgsConstructor
 @RestController
@@ -28,12 +29,22 @@ public class DishesController {
         );
     }
 
-    @GetMapping("/get-dish/{uuid}")
+    @PostMapping("/get-dish/{uuid}")
     public ResponseEntity<Dish> findDishById(@PathVariable("uuid") String uuid) {
         Dish dish = this.dishRegister.findById(uuid);
         return new ResponseEntity<>(
                 dish,
                 HttpStatus.OK
+        );
+    }
+
+    @PostMapping("/get-dish-by-event/{eventUuid}")
+    public ResponseEntity<List<Dish>> getDishByEvent(@PathVariable("eventUuid") String eventUuid) {
+        System.out.println("1h3uK3D4kir :: eventUuid: " + eventUuid);
+        var dishes = this.dishRegister.getDishesByEvent(eventUuid);
+
+        return new ResponseEntity<>(
+                dishes, HttpStatus.OK
         );
     }
 
