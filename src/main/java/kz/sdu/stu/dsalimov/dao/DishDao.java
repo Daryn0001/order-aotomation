@@ -1,7 +1,9 @@
 package kz.sdu.stu.dsalimov.dao;
 
 import kz.sdu.stu.dsalimov.dto.db.Dish;
+import kz.sdu.stu.dsalimov.dto.filter.DishFilter;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.jdbc.SQL;
 import org.postgresql.util.PGobject;
 import org.springframework.stereotype.Repository;
 
@@ -26,10 +28,13 @@ public interface DishDao {
                     "select * from dish where uuid in  (select * from dishUuid) ; ")
     List<Dish> getDishesByEvent(String eventUuid);
 
+    @SelectProvider(value = DishProvider.class, method = "getDishesByFilter")
+    List<Dish> getDishesByFilter(@Param("filter") DishFilter filter);
+
     @Insert(//language=PostgreSQL
             "INSERT INTO dish (uuid, title, description, pictures, ingredients, amount,  notes, price, is_active,  category_id)" +
                     " VALUES (#{dish.uuid}, #{dish.title}, #{dish.description}, #{pictures}, #{dishIngredients}, #{dish.amount}, #{dish.notes}, #{dish.price}, #{dish.isActive}, #{dish.categoryId})")
-    void insert(Dish dish,  PGobject dishIngredients, PGobject pictures);
+    void insert(Dish dish, PGobject dishIngredients, PGobject pictures);
 
     @Delete(//language=PostgreSQL
             "DELETE FROM dish WHERE uuid = #{uuid}")
@@ -38,16 +43,16 @@ public interface DishDao {
 
     @Update(//language=PostgreSQL
             "UPDATE dish " +
-            "SET title = #{dish.title}," +
-            "description = #{dish.description}," +
-            "pictures = #{dish.pictures}," +
-            "ingredients = #{dish.ingredients}," +
-            "amount = #{dish.amount}," +
-            "notes = #{dish.notes}," +
-            "price = #{dish.price}," +
-            "is_active = #{dish.isActive}," +
-            "category_id = #{dish.categoryId} " +
-            "WHERE uuid = #{dishUuid}")
+                    "SET title = #{dish.title}," +
+                    "description = #{dish.description}," +
+                    "pictures = #{dish.pictures}," +
+                    "ingredients = #{dish.ingredients}," +
+                    "amount = #{dish.amount}," +
+                    "notes = #{dish.notes}," +
+                    "price = #{dish.price}," +
+                    "is_active = #{dish.isActive}," +
+                    "category_id = #{dish.categoryId} " +
+                    "WHERE uuid = #{dishUuid}")
     void update(String dishUuid, Dish dish);
 
     @Update(//language=PostgreSQL
@@ -85,4 +90,43 @@ public interface DishDao {
     @Update(//language=PostgreSQL
             "UPDATE dish SET category_id = #{category_id} WHERE uuid = #{uuid}")
     void updateCategoryId(String uuid, int category_id);
+
+    class DishProvider {
+        public String getDishesByFilter(@Param("filter") DishFilter filter) {
+            System.out.println("R6H134o :: filter from dao: " + filter);
+            SQL sql = new SQL();
+
+            int offset = filter.getOffset() * filter.getLimit();
+
+            SQL query = baseQuery(sql);
+
+            if (filter.getSearchText() != null && !filter.getSearchText().isBlank()) {
+                String searchText = "%" + filter.getSearchText() + "%";
+                String search = String.format("title ILIKE '%s'", searchText);
+                query.WHERE(search);
+            }
+            query.ORDER_BY("title asc");
+
+            query.LIMIT(filter.getLimit())
+                    .OFFSET(offset);
+
+            System.out.println("J58NoZ7 :: SQL filter query: " + query);
+            return query.toString();
+        }
+
+        private SQL baseQuery(SQL sql) {
+            return sql.SELECT("uuid,\n" +
+                    "       title,\n" +
+                    "       description,\n" +
+                    "       pictures,\n" +
+                    "       ingredients,\n" +
+                    "       amount,\n" +
+                    "       notes,\n" +
+                    "       price,\n" +
+                    "       is_active   as isActive,\n" +
+                    "       category_id AS categoryId")
+                    .FROM("dish");
+
+        }
+    }
 }

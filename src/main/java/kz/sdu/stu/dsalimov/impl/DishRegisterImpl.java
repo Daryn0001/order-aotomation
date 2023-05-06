@@ -3,8 +3,11 @@ package kz.sdu.stu.dsalimov.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import kz.sdu.stu.dsalimov.controller.EventController;
+import kz.sdu.stu.dsalimov.dao.CategoryDao;
 import kz.sdu.stu.dsalimov.dao.DishDao;
 import kz.sdu.stu.dsalimov.dto.db.Dish;
+import kz.sdu.stu.dsalimov.dto.filter.DishFilter;
+import kz.sdu.stu.dsalimov.dto.to_client.SearchResponse;
 import kz.sdu.stu.dsalimov.register.DishRegister;
 import org.postgresql.util.PGobject;
 import org.slf4j.Logger;
@@ -13,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -23,6 +27,9 @@ public class DishRegisterImpl implements DishRegister {
 
     @Autowired
     private DishDao dishDao;
+
+    @Autowired
+    private CategoryDao categoryDao;
 
     @Override
     public List<Dish> getDishes() {
@@ -39,6 +46,17 @@ public class DishRegisterImpl implements DishRegister {
         var dishes = this.dishDao.getDishesByEvent(eventUuid);
         LOGGER.info("zTzOxYcRMJf :: dishes: " + dishes);
         return dishes;
+    }
+
+    @Override
+    public List<Object> getDishesByFilter(DishFilter filter) {
+        var searchResponse = new SearchResponse();
+        var categories = this.categoryDao.getCategoriesByFilter(filter);
+        var dishes = dishDao.getDishesByFilter(filter);
+
+        searchResponse.setDishes(dishes);
+        searchResponse.setCategories(categories);
+        return searchResponse.getResponse();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package kz.sdu.stu.dsalimov.register;
 
 import kz.sdu.stu.dsalimov.dto.db.Dish;
+import kz.sdu.stu.dsalimov.dto.filter.DishFilter;
 
 import java.util.List;
 
@@ -10,6 +11,8 @@ public interface DishRegister {
     Dish findById(String uuid);
 
     List<Dish> getDishesByEvent(String uuid);
+
+    List<Object> getDishesByFilter(DishFilter filter);
 
     void insert(Dish dish);
 

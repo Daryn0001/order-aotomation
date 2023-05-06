@@ -1,22 +1,25 @@
 package kz.sdu.stu.dsalimov.controller;
 
 import kz.sdu.stu.dsalimov.dto.db.Dish;
+import kz.sdu.stu.dsalimov.dto.filter.DishFilter;
 import kz.sdu.stu.dsalimov.dto.response.SuccessResponse;
 import kz.sdu.stu.dsalimov.register.DishRegister;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/api")
 @CrossOrigin(origins = {"http://localhost:3000", "https://order-automation-frontend-lake.vercel.app"})
 public class DishesController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(EventController.class);
     private final DishRegister dishRegister;
 
     @GetMapping("/dishes")
@@ -46,6 +49,15 @@ public class DishesController {
         return new ResponseEntity<>(
                 dishes, HttpStatus.OK
         );
+    }
+
+    @PostMapping("/get-dish-by-filter")
+    public ResponseEntity<List<Object>> getDishesByFilter(@RequestBody DishFilter filter) {
+        LOGGER.info("ViZg29GO :: filter from cont: " + filter);
+        var dishes = this.dishRegister.getDishesByFilter(filter);
+        LOGGER.info("0wtq4TH2m48 :: dishes by filter: " + dishes);
+
+        return new ResponseEntity<>( dishes, HttpStatus.OK);
     }
 
     @PostMapping("/delete-dish/{uuid}")
