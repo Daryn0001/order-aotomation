@@ -36,3 +36,5 @@ ALTER TABLE dishes
     ADD COLUMN IF NOT EXISTS ingredients JSON DEFAULT NULL,
     ADD COLUMN IF NOT EXISTS created_at timestamp NULL DEFAULT NULL,
     ADD COLUMN IF NOT EXISTS updated_at timestamp NULL DEFAULT NULL;
+
+
