@@ -12,42 +12,42 @@ import java.util.List;
 @Repository
 public interface CategoryDao {
     @Select(//language=PostgreSQL
-            "SELECT id, parent_category_id as parentCategoryId, name, description FROM category")
+            "SELECT id, parent_category_id as parentCategoryId, name, description FROM categories")
     List<Category> getCategories();
 
     @Select(//language=PostgreSQL
-            "SELECT id, parent_category_id as parentCategoryId, name, description FROM category where id = #{id}")
+            "SELECT id, parent_category_id as parentCategoryId, name, description FROM categories where id = #{id}")
     Category findById(int id);
 
     @SelectProvider(value = CategoryProvider.class, method = "getCategoriesByFilter")
     List<Category> getCategoriesByFilter(@Param("filter") DishFilter filter);
 
     @Insert(//language=PostgreSQL
-            "INSERT INTO category ( parent_category_id, name, description)" +
+            "INSERT INTO categories ( parent_category_id, name, description)" +
                     " VALUES ( #{parentCategoryId}, #{name}, #{description})")
     void insert(Category category);
 
     @Delete(//language=PostgreSQL
-            "DELETE FROM category WHERE id = #{id}")
+            "DELETE FROM categories WHERE id = #{id}")
     void delete(int id);
 
     @Update(//language=PostgreSQL
-            "UPDATE category SET parent_category_id = #{category.parentCategoryId}," +
+            "UPDATE categories SET parent_category_id = #{category.parentCategoryId}," +
                     " name = #{category.name}," +
                     " description = #{category.description}" +
                     " WHERE id = #{id}")
     void update(int id, Category category);
 
     @Update(//language=PostgreSQL
-            "UPDATE category SET parent_category_id = #{parentCategoryId} WHERE id = #{id}")
+            "UPDATE categories SET parent_category_id = #{parentCategoryId} WHERE id = #{id}")
     void updateParentCategoryId(int id, int parentCategoryId);
 
     @Update(//language=PostgreSQL
-            "UPDATE category SET name = #{name} WHERE id = #{id}")
+            "UPDATE categories SET name = #{name} WHERE id = #{id}")
     void updateName(int id, String name);
 
     @Update(//language=PostgreSQL
-            "UPDATE category SET description = #{description} WHERE id = #{id}")
+            "UPDATE categories SET description = #{description} WHERE id = #{id}")
     void updateDescription(int id, String description);
 
     class CategoryProvider {

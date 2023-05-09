@@ -15,34 +15,38 @@ public interface DishDao {
 
     @Select(//language=PostgreSQL
             "SELECT uuid, title, description, pictures, ingredients, amount, notes, price, is_active as isActive," +
-                    " category_id AS categoryId FROM dish")
+                    " category_id AS categoryId FROM dishes")
     List<Dish> getDishes();
 
     @Select(//language=PostgreSQL
             "SELECT uuid, title, description, pictures, ingredients, amount, notes, price, is_active as isActive," +
-                    " category_id AS categoryId FROM dish WHERE uuid = #{uuid}")
+                    " category_id AS categoryId FROM dishes WHERE uuid = #{uuid}")
     Dish findById(String uuid);
 
     @Select(//language=PostgreSQL
             "with dishUuid as (select dish_uuid from elements join event e on e.uuid = elements.event_uuid where event_uuid = #{eventUuid})\n" +
-                    "select * from dish where uuid in  (select * from dishUuid) ; ")
+                    "select * from dishes where uuid in  (select * from dishUuid) ; ")
     List<Dish> getDishesByEvent(String eventUuid);
 
     @SelectProvider(value = DishProvider.class, method = "getDishesByFilter")
     List<Dish> getDishesByFilter(@Param("filter") DishFilter filter);
 
+    @Select(//language=PostgreSQL
+            "SELECT uuid, title, description, pictures, ingredients, amount, notes, price, is_active as isActive, category_id AS categoryId" +
+                    " FROM dishes WHERE category_id = #{categoryId}")
+    List<Dish> getDishesByCategory(@Param("categoryId") int categoryId);
+
     @Insert(//language=PostgreSQL
-            "INSERT INTO dish (uuid, title, description, pictures, ingredients, amount,  notes, price, is_active,  category_id)" +
+            "INSERT INTO dishes (uuid, title, description, pictures, ingredients, amount,  notes, price, is_active,  category_id)" +
                     " VALUES (#{dish.uuid}, #{dish.title}, #{dish.description}, #{pictures}, #{dishIngredients}, #{dish.amount}, #{dish.notes}, #{dish.price}, #{dish.isActive}, #{dish.categoryId})")
     void insert(Dish dish, PGobject dishIngredients, PGobject pictures);
 
     @Delete(//language=PostgreSQL
-            "DELETE FROM dish WHERE uuid = #{uuid}")
+            "DELETE FROM dishes WHERE uuid = #{uuid}")
     void delete(String uuid);
 
-
     @Update(//language=PostgreSQL
-            "UPDATE dish " +
+            "UPDATE dishes " +
                     "SET title = #{dish.title}," +
                     "description = #{dish.description}," +
                     "pictures = #{dish.pictures}," +
@@ -56,39 +60,39 @@ public interface DishDao {
     void update(String dishUuid, Dish dish);
 
     @Update(//language=PostgreSQL
-            "UPDATE dish SET title = #{title} WHERE uuid = #{uuid}")
+            "UPDATE dishes SET title = #{title} WHERE uuid = #{uuid}")
     void updateTitle(String uuid, String title);
 
     @Update(//language=PostgreSQL
-            "UPDATE dish SET description = #{description} WHERE uuid = #{uuid}")
+            "UPDATE dishes SET description = #{description} WHERE uuid = #{uuid}")
     void updateDescription(String uuid, String description);
 
     @Update(//language=PostgreSQL
-            "UPDATE dish SET pictures = #{pictures} WHERE uuid = #{uuid}")
+            "UPDATE dishes SET pictures = #{pictures} WHERE uuid = #{uuid}")
     void updatePicture(String uuid, String pictures);
 
     @Update(//language=PostgreSQL
-            "UPDATE dish SET ingredients = #{ingredients} WHERE uuid = #{uuid}")
+            "UPDATE dishes SET ingredients = #{ingredients} WHERE uuid = #{uuid}")
     void updateIngredients(String uuid, String ingredients);
 
     @Update(//language=PostgreSQL
-            "UPDATE dish SET amount = #{amount} WHERE uuid = #{uuid}")
+            "UPDATE dishes SET amount = #{amount} WHERE uuid = #{uuid}")
     void updateAmount(String uuid, int amount);
 
     @Update(//language=PostgreSQL
-            "UPDATE dish SET notes = #{notes} WHERE uuid = #{uuid}")
+            "UPDATE dishes SET notes = #{notes} WHERE uuid = #{uuid}")
     void updateNote(String uuid, String notes);
 
     @Update(//language=PostgreSQL
-            "UPDATE dish SET price = #{price} WHERE uuid = #{uuid}")
+            "UPDATE dishes SET price = #{price} WHERE uuid = #{uuid}")
     void updatePrice(String uuid, int price);
 
     @Update(//language=PostgreSQL
-            "UPDATE dish SET is_active = #{isActive} WHERE uuid = #{uuid}")
+            "UPDATE dishes SET is_active = #{isActive} WHERE uuid = #{uuid}")
     void updateIsActive(String uuid, boolean isActive);
 
     @Update(//language=PostgreSQL
-            "UPDATE dish SET category_id = #{category_id} WHERE uuid = #{uuid}")
+            "UPDATE dishes SET category_id = #{category_id} WHERE uuid = #{uuid}")
     void updateCategoryId(String uuid, int category_id);
 
     class DishProvider {
@@ -116,15 +120,15 @@ public interface DishDao {
 
         private SQL baseQuery(SQL sql) {
             return sql.SELECT("uuid,\n" +
-                    "       title,\n" +
-                    "       description,\n" +
-                    "       pictures,\n" +
-                    "       ingredients,\n" +
-                    "       amount,\n" +
-                    "       notes,\n" +
-                    "       price,\n" +
-                    "       is_active   as isActive,\n" +
-                    "       category_id AS categoryId")
+                            "       title,\n" +
+                            "       description,\n" +
+                            "       pictures,\n" +
+                            "       ingredients,\n" +
+                            "       amount,\n" +
+                            "       notes,\n" +
+                            "       price,\n" +
+                            "       is_active   as isActive,\n" +
+                            "       category_id AS categoryId")
                     .FROM("dish");
 
         }

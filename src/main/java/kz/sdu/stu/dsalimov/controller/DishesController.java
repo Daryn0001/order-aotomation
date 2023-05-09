@@ -43,7 +43,7 @@ public class DishesController {
 
     @PostMapping("/get-dish-by-event/{eventUuid}")
     public ResponseEntity<List<Dish>> getDishByEvent(@PathVariable("eventUuid") String eventUuid) {
-        System.out.println("1h3uK3D4kir :: eventUuid: " + eventUuid);
+        LOGGER.info("1h3uK3D4kir :: eventUuid: " + eventUuid);
         var dishes = this.dishRegister.getDishesByEvent(eventUuid);
 
         return new ResponseEntity<>(
@@ -60,6 +60,15 @@ public class DishesController {
         return new ResponseEntity<>( dishes, HttpStatus.OK);
     }
 
+    @GetMapping("/get-dish-by-category/{categoryId}")
+    public ResponseEntity<List<Dish>> getDishesByCategory(@PathVariable("categoryId") int categoryId) {
+        LOGGER.info("VB4T2a1Pka :: category id: " + categoryId);
+        var dishes = this.dishRegister.getDishesByCategory(categoryId);
+        LOGGER.info("XFyu5v :: dishes by categoryId : " + dishes);
+
+        return new ResponseEntity<>(dishes, HttpStatus.OK);
+    }
+
     @PostMapping("/delete-dish/{uuid}")
     public void deleteDish(@PathVariable("uuid") String uuid) {
         this.dishRegister.delete(uuid);
@@ -67,7 +76,7 @@ public class DishesController {
 
     @PostMapping("add/dish")
     public ResponseEntity<SuccessResponse> insertDish(@RequestBody Dish dish) {
-        System.out.println(" new dish: " + dish);
+        LOGGER.info("WcYSQ836 :: new dish: " + dish);
 
         if (!ObjectUtils.isEmpty(dish.getUuid())) {
             throw new RuntimeException(" Крч айлди должен быть пустым");
@@ -79,7 +88,7 @@ public class DishesController {
 
     @PostMapping("update-dish/{uuid}")
     public void updateDish(@RequestBody Dish dish, @PathVariable("uuid") String uuid) {
-        System.out.println("uuid: " + uuid + "\nupdate dish: " + dish);
+        LOGGER.info("lLMwDYctg1 :: uuid: " + uuid + "\nupdate dish: " + dish);
 
         this.dishRegister.update(uuid, dish);
     }

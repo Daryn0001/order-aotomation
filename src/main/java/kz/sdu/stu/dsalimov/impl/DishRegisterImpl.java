@@ -60,6 +60,11 @@ public class DishRegisterImpl implements DishRegister {
     }
 
     @Override
+    public List<Dish> getDishesByCategory(int categoryId) {
+        return this.dishDao.getDishesByCategory(categoryId);
+    }
+
+    @Override
     public void insert(Dish dish) {
         UUID uuid = UUID.randomUUID();
         dish.setUuid(uuid.toString());

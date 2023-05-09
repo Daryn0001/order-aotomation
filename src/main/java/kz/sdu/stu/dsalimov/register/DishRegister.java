@@ -14,6 +14,8 @@ public interface DishRegister {
 
     List<Object> getDishesByFilter(DishFilter filter);
 
+    List<Dish> getDishesByCategory(int categoryId);
+
     void insert(Dish dish);
 
     void delete(String uuid);
