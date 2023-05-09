@@ -1,2 +1,2 @@
-SET WORK_MEM = '128MB';
-SET maintenance_work_mem = '1GB';
+SET WORK_MEM = '16MB';
+SET maintenance_work_mem = '64MB';

@@ -24,7 +24,7 @@ public interface DishDao {
     Dish findById(String uuid);
 
     @Select(//language=PostgreSQL
-            "with dishUuid as (select dish_uuid from elements join event e on e.uuid = elements.event_uuid where event_uuid = #{eventUuid})\n" +
+            "with dishUuid as (select dish_uuid from elements join events e on e.uuid = elements.event_uuid where event_uuid = #{eventUuid})\n" +
                     "select * from dishes where uuid in  (select * from dishUuid) ; ")
     List<Dish> getDishesByEvent(String eventUuid);
 
