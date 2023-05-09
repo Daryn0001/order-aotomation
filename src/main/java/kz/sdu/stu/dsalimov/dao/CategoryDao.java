@@ -79,7 +79,7 @@ public interface CategoryDao {
 
         private SQL baseQuery(SQL sql) {
             return sql.SELECT(" id, parent_category_id as parentCategoryId, name, description")
-                    .FROM("category");
+                    .FROM("categories");
 
         }
     }

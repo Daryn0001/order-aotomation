@@ -129,7 +129,7 @@ public interface DishDao {
                             "       price,\n" +
                             "       is_active   as isActive,\n" +
                             "       category_id AS categoryId")
-                    .FROM("dish");
+                    .FROM("dishes");
 
         }
     }
