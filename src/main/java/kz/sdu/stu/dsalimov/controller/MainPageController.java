@@ -1,6 +1,5 @@
 package kz.sdu.stu.dsalimov.controller;
 
-import kz.sdu.stu.dsalimov.dto.response.SuccessResponse;
 import kz.sdu.stu.dsalimov.dto.to_client.MainPageBody;
 import kz.sdu.stu.dsalimov.dto.to_client.MainPageHeader;
 import kz.sdu.stu.dsalimov.register.MainPageRegister;

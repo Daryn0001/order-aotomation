@@ -1,12 +1,16 @@
 package kz.sdu.stu.dsalimov.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import kz.sdu.stu.dsalimov.dao.CategoryDao;
 import kz.sdu.stu.dsalimov.dto.db.Category;
 import kz.sdu.stu.dsalimov.dto.filter.DishFilter;
 import kz.sdu.stu.dsalimov.register.CategoryRegister;
+import org.postgresql.util.PGobject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -21,7 +25,10 @@ public class CategoryRegisterImpl implements CategoryRegister {
 
     @Override
     public Category findById(int id) {
-        return this.categoryDao.findById(id);
+        var dishCount = this.categoryDao.getDishCountFromCategory(id);
+        var category = this.categoryDao.findById(id);
+        category.setDishCount(dishCount);
+        return category;
     }
 
     @Override
@@ -31,7 +38,18 @@ public class CategoryRegisterImpl implements CategoryRegister {
 
     @Override
     public void insert(Category category) {
-        this.categoryDao.insert(category);
+        ObjectMapper objectMapper = new ObjectMapper();
+        ArrayNode picturesJsonArray = objectMapper.createArrayNode();
+        picturesJsonArray.add(category.getImage());
+        PGobject picturesJsonbObject = new PGobject();
+        picturesJsonbObject.setType("json");
+
+        try {
+            picturesJsonbObject.setValue(picturesJsonArray.toString());
+            this.categoryDao.insert(category, picturesJsonbObject);
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

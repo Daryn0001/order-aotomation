@@ -4,6 +4,7 @@ import kz.sdu.stu.dsalimov.dto.db.Category;
 import kz.sdu.stu.dsalimov.dto.filter.DishFilter;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
+import org.postgresql.util.PGobject;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,20 +13,24 @@ import java.util.List;
 @Repository
 public interface CategoryDao {
     @Select(//language=PostgreSQL
-            "SELECT id, parent_category_id as parentCategoryId, name, description FROM categories")
+            "SELECT id, parent_category_id as parentCategoryId, name, description, image FROM categories")
     List<Category> getCategories();
 
     @Select(//language=PostgreSQL
-            "SELECT id, parent_category_id as parentCategoryId, name, description FROM categories where id = #{id}")
+            "SELECT id, parent_category_id as parentCategoryId, name, description, image FROM categories where id = #{id}")
     Category findById(int id);
 
     @SelectProvider(value = CategoryProvider.class, method = "getCategoriesByFilter")
     List<Category> getCategoriesByFilter(@Param("filter") DishFilter filter);
 
+    @Select(//language=PostgreSQL
+            "select count(*) from dishes join categories c on dishes.category_id = c.id where category_id = #{categoryId}")
+    int getDishCountFromCategory(@Param("categoryId") int categoryId);
+
     @Insert(//language=PostgreSQL
-            "INSERT INTO categories ( parent_category_id, name, description)" +
-                    " VALUES ( #{parentCategoryId}, #{name}, #{description})")
-    void insert(Category category);
+            "INSERT INTO categories ( parent_category_id, name, description, image)" +
+                    " VALUES ( #{category.parentCategoryId}, #{category.name}, #{category.description}, #{image})")
+    void insert(Category category, PGobject image);
 
     @Delete(//language=PostgreSQL
             "DELETE FROM categories WHERE id = #{id}")
@@ -78,7 +83,7 @@ public interface CategoryDao {
         }
 
         private SQL baseQuery(SQL sql) {
-            return sql.SELECT(" id, parent_category_id as parentCategoryId, name, description")
+            return sql.SELECT(" id, parent_category_id as parentCategoryId, name, description, image")
                     .FROM("categories");
 
         }
