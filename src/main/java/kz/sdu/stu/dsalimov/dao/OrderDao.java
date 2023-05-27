@@ -1,6 +1,6 @@
 package kz.sdu.stu.dsalimov.dao;
 
-import kz.sdu.stu.dsalimov.dto.db.Orders;
+import kz.sdu.stu.dsalimov.dto.db.OrderDto;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -12,16 +12,19 @@ import java.util.List;
 @Mapper
 @Repository
 public interface OrderDao {
-// FIXME
-    @Select("SELECT * FROM orders")
-    List<Orders> getTables();
+    @Select(//language=PostgreSQL
+            "SELECT uuid, phone, name, table_uuid as tableUuid, price FROM orders")
+    List<OrderDto> getTables();
 
-    @Select("select * from orders where uuid = #{uuid}")
-    Orders findById(String uuid);
+    @Select(//language=PostgreSQL
+            "select uuid, phone, name, table_uuid as tableUuid, price from orders where uuid = #{uuid}")
+    OrderDto findById(String uuid);
 
-    @Insert("INSERT INTO orders (uuid, floor, internalId, temporaryKey) VALUES (#{uuid}, #{floor}, #{internalId}, #{temporaryKey})")
-    void insert(Orders table);
+    @Insert(//language=PostgreSQL
+            "INSERT INTO orders ( uuid, phone, name, table_uuid, price ) VALUES (#{uuid}, #{phone}, #{name}, #{tableUuid}, #{price})")
+    void insert(OrderDto table);
 
-    @Delete("DELETE FROM orders WHERE uuid = #{uuid}")
+    @Delete(//language=PostgreSQL
+            "DELETE FROM orders WHERE uuid = #{uuid}")
     void delete(String uuid);
 }

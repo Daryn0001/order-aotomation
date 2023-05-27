@@ -11,6 +11,9 @@ CREATE TABLE IF NOT EXISTS orders
 
 ALTER TABLE orders
     DROP COLUMN IF EXISTS booking_uuid,
+    ALTER COLUMN phone DROP NOT NULL,
+    ALTER COLUMN name DROP NOT NULL,
+
 
     ADD COLUMN IF NOT EXISTS
         created_at timestamp NULL DEFAULT NULL,

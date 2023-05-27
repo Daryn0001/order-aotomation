@@ -4,13 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import kz.sdu.stu.dsalimov.dao.CategoryDao;
 import kz.sdu.stu.dsalimov.dto.db.Category;
-import kz.sdu.stu.dsalimov.dto.filter.DishFilter;
+import kz.sdu.stu.dsalimov.dto.filter.SearchFilter;
 import kz.sdu.stu.dsalimov.register.CategoryRegister;
 import org.postgresql.util.PGobject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -32,7 +31,7 @@ public class CategoryRegisterImpl implements CategoryRegister {
     }
 
     @Override
-    public List<Category> getCategoriesByFilter(DishFilter filter) {
+    public List<Category> getCategoriesByFilter(SearchFilter filter) {
         return this.categoryDao.getCategoriesByFilter(filter);
     }
 

@@ -21,6 +21,8 @@ public class BasketDto {
 
     private String orderUuid;
 
+    private int price;
+
     private Timestamp createdAt;
 
     private Timestamp updatedAt;

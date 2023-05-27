@@ -1,7 +1,7 @@
 package kz.sdu.stu.dsalimov.dao;
 
 import kz.sdu.stu.dsalimov.dto.db.Dish;
-import kz.sdu.stu.dsalimov.dto.filter.DishFilter;
+import kz.sdu.stu.dsalimov.dto.filter.SearchFilter;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 import org.postgresql.util.PGobject;
@@ -29,7 +29,7 @@ public interface DishDao {
     List<Dish> getDishesByEvent(String eventUuid);
 
     @SelectProvider(value = DishProvider.class, method = "getDishesByFilter")
-    List<Dish> getDishesByFilter(@Param("filter") DishFilter filter);
+    List<Dish> getDishesByFilter(@Param("filter") SearchFilter filter);
 
     @Select(//language=PostgreSQL
             "SELECT uuid, title, description, pictures, ingredients, amount, notes, price, is_active as isActive, category_id AS categoryId" +
@@ -96,7 +96,7 @@ public interface DishDao {
     void updateCategoryId(String uuid, int category_id);
 
     class DishProvider {
-        public String getDishesByFilter(@Param("filter") DishFilter filter) {
+        public String getDishesByFilter(@Param("filter") SearchFilter filter) {
             System.out.println("R6H134o :: filter from dao: " + filter);
             SQL sql = new SQL();
 

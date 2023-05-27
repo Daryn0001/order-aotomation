@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class DishFilter {
+public class SearchFilter {
     private int limit;
     private int offset;
     private String searchText;

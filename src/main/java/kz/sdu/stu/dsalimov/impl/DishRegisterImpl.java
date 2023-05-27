@@ -6,7 +6,7 @@ import kz.sdu.stu.dsalimov.controller.EventController;
 import kz.sdu.stu.dsalimov.dao.CategoryDao;
 import kz.sdu.stu.dsalimov.dao.DishDao;
 import kz.sdu.stu.dsalimov.dto.db.Dish;
-import kz.sdu.stu.dsalimov.dto.filter.DishFilter;
+import kz.sdu.stu.dsalimov.dto.filter.SearchFilter;
 import kz.sdu.stu.dsalimov.dto.to_client.SearchResponse;
 import kz.sdu.stu.dsalimov.register.DishRegister;
 import org.postgresql.util.PGobject;
@@ -16,8 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,7 +47,7 @@ public class DishRegisterImpl implements DishRegister {
     }
 
     @Override
-    public List<Object> getDishesByFilter(DishFilter filter) {
+    public List<Object> getDishesByFilter(SearchFilter filter) {
         var searchResponse = new SearchResponse();
         var categories = this.categoryDao.getCategoriesByFilter(filter);
         var dishes = dishDao.getDishesByFilter(filter);

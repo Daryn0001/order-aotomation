@@ -11,15 +11,15 @@ import java.util.List;
 @Repository
 public interface BasketDao {
     @Select(//language=PostgreSQL
-            "SELECT * FROM baskets")
-    List<Tables> getTables();
+            "SELECT uuid, amount, dish_uuid as dishUuid, order_uuid as orderUuid, price FROM baskets")
+    List<BasketDto> getBaskets();
 
     @Select(//language=PostgreSQL
-            "select * from baskets where uuid = #{uuid}")
-    Tables findById(String uuid);
+            "select uuid, amount, dish_uuid as dishUuid, order_uuid as orderUuid, price from baskets where uuid = #{uuid}")
+    BasketDto findById(String uuid);
 
     @Insert(//language=PostgreSQL
-            "INSERT INTO baskets (uuid, amount, dish_uuid, order_uuid) VALUES (#{uuid}, #{amount}, #{dishUuid}, #{orderUuid})")
+            "INSERT INTO baskets (uuid, amount, dish_uuid, order_uuid, price) VALUES (#{uuid}, #{amount}, #{dishUuid}, #{orderUuid}, #{price})")
     void insert(BasketDto basketDto);
 
     @Delete(//language=PostgreSQL
@@ -37,4 +37,8 @@ public interface BasketDao {
     @Update(//language=PostgreSQL
             "UPDATE baskets SET order_uuid = #{orderUuid} WHERE uuid = #{uuid}")
     void updateOrderUuid(String uuid, String orderUuid);
+
+    @Update(//language=PostgreSQL
+            "UPDATE baskets SET price = #{price} WHERE uuid = #{uuid}")
+    void updatePrice(String uuid, int price);
 }

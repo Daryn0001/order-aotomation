@@ -1,7 +1,7 @@
 package kz.sdu.stu.dsalimov.dao;
 
 import kz.sdu.stu.dsalimov.dto.db.Category;
-import kz.sdu.stu.dsalimov.dto.filter.DishFilter;
+import kz.sdu.stu.dsalimov.dto.filter.SearchFilter;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 import org.postgresql.util.PGobject;
@@ -21,7 +21,7 @@ public interface CategoryDao {
     Category findById(int id);
 
     @SelectProvider(value = CategoryProvider.class, method = "getCategoriesByFilter")
-    List<Category> getCategoriesByFilter(@Param("filter") DishFilter filter);
+    List<Category> getCategoriesByFilter(@Param("filter") SearchFilter filter);
 
     @Select(//language=PostgreSQL
             "select count(*) from dishes join categories c on dishes.category_id = c.id where category_id = #{categoryId}")
@@ -56,7 +56,7 @@ public interface CategoryDao {
     void updateDescription(int id, String description);
 
     class CategoryProvider {
-        public String getCategoriesByFilter(@Param("filter") DishFilter filter) {
+        public String getCategoriesByFilter(@Param("filter") SearchFilter filter) {
             System.out.println("NOttNNPqmqRm :: filter from category dao: " + filter);
             SQL sql = new SQL();
 

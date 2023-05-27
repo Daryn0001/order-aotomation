@@ -1,7 +1,7 @@
 package kz.sdu.stu.dsalimov.controller;
 
 import kz.sdu.stu.dsalimov.dto.db.Dish;
-import kz.sdu.stu.dsalimov.dto.filter.DishFilter;
+import kz.sdu.stu.dsalimov.dto.filter.SearchFilter;
 import kz.sdu.stu.dsalimov.dto.response.SuccessResponse;
 import kz.sdu.stu.dsalimov.register.DishRegister;
 import lombok.RequiredArgsConstructor;
@@ -52,7 +52,7 @@ public class DishesController {
     }
 
     @PostMapping("/get-dish-by-filter")
-    public ResponseEntity<List<Object>> getDishesByFilter(@RequestBody DishFilter filter) {
+    public ResponseEntity<List<Object>> getDishesByFilter(@RequestBody SearchFilter filter) {
         LOGGER.info("ViZg29GO :: filter from cont: " + filter);
         var dishes = this.dishRegister.getDishesByFilter(filter);
         LOGGER.info("0wtq4TH2m48 :: dishes by filter: " + dishes);
