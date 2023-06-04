@@ -20,16 +20,16 @@ public class MainPageController {
     private final MainPageRegister mainPageRegister;
 
     @GetMapping("/get-slider-data")
-    public ResponseEntity<MainPageBody> getBody(@RequestParam(required = true) String temporaryKey) {
+    public ResponseEntity<MainPageBody> getBody(@RequestParam String temporaryKey) {
         var body = this.mainPageRegister.getBody(temporaryKey);
 
-        System.out.println("od2f6OqG3w :: body: " + body);
+        LOGGER.info("od2f6OqG3w :: body: " + body);
 
         return new ResponseEntity<>(body,  HttpStatus.OK);
     }
 
     @GetMapping("/get-header-data")
-    public MainPageHeader getHeader(@RequestParam(required = true) String temporaryKey) {
+    public MainPageHeader getHeader(@RequestParam String temporaryKey) {
         LOGGER.info("od2f6OqG3w :: getHeader tempKey: " + temporaryKey);
 
         return this.mainPageRegister.getHeader(temporaryKey);
