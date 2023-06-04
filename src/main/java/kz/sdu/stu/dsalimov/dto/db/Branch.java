@@ -13,8 +13,8 @@ public class Branch {
     private String uuid;
     private String name;
     private String address;
-    private Long adminUuid;
-    private String companyId;
+    private Long adminId;
+    private String companyUuid;
 
     private Timestamp createdAt;
 
