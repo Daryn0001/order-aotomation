@@ -18,6 +18,11 @@ public interface EventDao {
             "SELECT uuid, title, description, image, places_uuid as placeUuid FROM events WHERE uuid = #{uuid}")
     Event findByUuid(String uuid);
 
+
+    @Select(//language=PostgreSQL
+            "SELECT uuid, title, description, image, places_uuid as placeUuid FROM events WHERE places_uuid = #{placeUuid}")
+    List<Event> findByPlaceUuid(String placeUuid);
+
     @Insert(//language=PostgreSQL
             "INSERT INTO events (uuid, title, description, image, places_uuid) VALUES (#{event.uuid}, #{event.title}, #{event.description}, #{imageJsonb}, #{event.placeUuid})")
     boolean insert(Event event, PGobject imageJsonb);
