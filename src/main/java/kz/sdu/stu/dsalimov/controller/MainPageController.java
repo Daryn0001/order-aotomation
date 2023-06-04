@@ -4,6 +4,8 @@ import kz.sdu.stu.dsalimov.dto.to_client.MainPageBody;
 import kz.sdu.stu.dsalimov.dto.to_client.MainPageHeader;
 import kz.sdu.stu.dsalimov.register.MainPageRegister;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +16,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api")
 @CrossOrigin(origins = {"http://localhost:3000", "https://order-automation-frontend-lake.vercel.app"})
 public class MainPageController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(EventController.class);
     private final MainPageRegister mainPageRegister;
 
-    @GetMapping("/get-slider-data/{temporaryKey}")
-    public ResponseEntity<MainPageBody> getBody(@PathVariable("temporaryKey") String temporaryKey) {
+    @GetMapping("/get-slider-data")
+    public ResponseEntity<MainPageBody> getBody(@RequestParam(required = true) String temporaryKey) {
         var body = this.mainPageRegister.getBody(temporaryKey);
 
         System.out.println("od2f6OqG3w :: body: " + body);
@@ -25,11 +28,11 @@ public class MainPageController {
         return new ResponseEntity<>(body,  HttpStatus.OK);
     }
 
-    @GetMapping("/get-header-data/{temporaryKey}")
-    public ResponseEntity<MainPageHeader> getHeader(@PathVariable("temporaryKey") String temporaryKey) {
-        var header = this.mainPageRegister.getHeader(temporaryKey);
+    @GetMapping("/get-header-data")
+    public MainPageHeader getHeader(@RequestParam(required = true) String temporaryKey) {
+        LOGGER.info("od2f6OqG3w :: getHeader tempKey: " + temporaryKey);
 
-        return new ResponseEntity<>(header, HttpStatus.OK);
+        return this.mainPageRegister.getHeader(temporaryKey);
     }
 
 }

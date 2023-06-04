@@ -5,6 +5,7 @@ import kz.sdu.stu.dsalimov.dto.filter.SearchFilter;
 import kz.sdu.stu.dsalimov.dto.response.SuccessResponse;
 import kz.sdu.stu.dsalimov.register.DishRegister;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.json.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -42,13 +43,10 @@ public class DishesController {
     }
 
     @PostMapping("/get-dish-by-event/{eventUuid}")
-    public ResponseEntity<List<Dish>> getDishByEvent(@PathVariable("eventUuid") String eventUuid) {
+    public List<Dish> getDishByEvent(@PathVariable("eventUuid") String eventUuid) {
         LOGGER.info("1h3uK3D4kir :: eventUuid: " + eventUuid);
-        var dishes = this.dishRegister.getDishesByEvent(eventUuid);
 
-        return new ResponseEntity<>(
-                dishes, HttpStatus.OK
-        );
+        return this.dishRegister.getDishesByEvent(eventUuid);
     }
 
     @PostMapping("/get-dish-by-filter")
