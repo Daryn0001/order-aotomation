@@ -38,7 +38,7 @@ public class MainPageRegisterImpl implements MainPageRegister {
     public MainPageHeader getHeader(String temporaryKey) {
         var table = this.tableDao.findByTempKey(temporaryKey);
 
-        Branch branch = null;
+        Branch branch;
         if (!ObjectUtils.isEmpty(table)) {
             branch = this.branchDao.findByUuid(table.getBranchUuid());
         } else {
@@ -78,7 +78,7 @@ public class MainPageRegisterImpl implements MainPageRegister {
             String placeName = place.getName().trim().replace(' ', '_');
             var list = this.eventDao.findByPlaceUuid(place.getUuid());
 
-            var slideItemList = new ArrayList<SlideItem>(
+            var slideItemList = new ArrayList<>(
                     list.stream()
                             .map(event -> new SlideItem(
                                     event.getUuid(),
