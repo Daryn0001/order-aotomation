@@ -17,6 +17,10 @@ public interface PlaceDao {
             "SELECT uuid, type, name, size, branch_uuid as branchUuid FROM place WHERE uuid = #{uuid}")
     Place findByUuid(String uuid);
 
+    @Select(//language=PostgreSQL
+            "SELECT  uuid, type, name, size, branch_uuid as branchUuid FROM place WHERE branch_Uuid = #{branchUuid} " )
+    List<Place> findByBranchUuid(String branchUuid);
+
     @Insert(//language=PostgreSQL
             "INSERT INTO place (uuid, type, name, size, branch_uuid) VALUES (#{uuid}, #{type}, #{name}, #{size}, #{branchUuid})")
     void insert(Place place);
