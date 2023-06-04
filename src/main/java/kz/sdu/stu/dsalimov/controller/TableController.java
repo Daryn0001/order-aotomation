@@ -1,16 +1,13 @@
 package kz.sdu.stu.dsalimov.controller;
 
+import kz.sdu.stu.dsalimov.dto.db.Table;
 import kz.sdu.stu.dsalimov.register.TableRegister;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
-import kz.sdu.stu.dsalimov.dto.db.Tables;
-import kz.sdu.stu.dsalimov.dto.response.SuccessResponse;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -21,8 +18,8 @@ public class TableController {
     private final TableRegister tableRegister;
 
     @GetMapping("/tables")
-    public ResponseEntity<List<Tables>> getTables() {
-        List<Tables> tables = this.tableRegister.getTables();
+    public ResponseEntity<List<Table>> getTables() {
+        List<Table> tables = this.tableRegister.getTables();
         System.out.println(" get mappings tb: " + tables);
         return new ResponseEntity<>(
                 tables,
@@ -30,14 +27,8 @@ public class TableController {
         );
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<Test> test() {
-        Test t = new Test("test1", "test2", 5);
-        return new ResponseEntity<>(t, HttpStatus.OK);
-    }
-
     @GetMapping("/getTable/{uuid}")
-    public @ResponseBody ResponseEntity<Tables> getTableById(@PathVariable("uuid") String uuid) {
+    public @ResponseBody ResponseEntity<Table> getTableById(@PathVariable("uuid") String uuid) {
         System.out.println(" found by id: " + this.tableRegister.findById(uuid));
         return new ResponseEntity<>(
                 this.tableRegister.findById(uuid),
@@ -46,12 +37,12 @@ public class TableController {
     }
 
     @GetMapping("/table/{uuid}")
-    public ResponseEntity<Tables> getTable(@PathVariable("uuid") String uuid) {
+    public ResponseEntity<Table> getTable(@PathVariable("uuid") String uuid) {
         return new ResponseEntity<>(this.tableRegister.findById(uuid), HttpStatus.OK);
     }
 
     @PostMapping("/add/table")
-    public void insertTable(@RequestBody Tables table) {
+    public void insertTable(@RequestBody Table table) {
 
         System.out.println(" post mappings");
         if (!ObjectUtils.isEmpty(table.getUuid())) {
@@ -64,12 +55,4 @@ public class TableController {
     public void deleteTable(@PathVariable("uuid") String uuid) {
         this.tableRegister.delete(uuid);
     }
-}
-
-@AllArgsConstructor
-@Data
-class Test {
-    private String test1;
-    private String test2;
-    private int test3;
 }
