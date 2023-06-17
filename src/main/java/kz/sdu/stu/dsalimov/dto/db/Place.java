@@ -15,4 +15,6 @@ public class Place {
     private String type;
 
     private String size;
+
+    private String branchUuid;
 }

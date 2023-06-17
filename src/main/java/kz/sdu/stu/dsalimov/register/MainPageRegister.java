@@ -5,8 +5,8 @@ import kz.sdu.stu.dsalimov.dto.to_client.MainPageHeader;
 
 public interface MainPageRegister {
 
-    MainPageHeader getHeader();
+    MainPageHeader getHeader(String temporaryKey);
 
-    MainPageBody getBody();
+    MainPageBody getBody(String temporaryKey);
 
 }

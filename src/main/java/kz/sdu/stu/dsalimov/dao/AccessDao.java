@@ -10,20 +10,20 @@ import java.util.List;
 @Repository
 public interface AccessDao {
     @Select(//language=PostgreSQL
-            "SELECT * FROM accesses")
+            "SELECT branch_uuid, user_id as userId FROM accesses")
     List<AccessDto> findAll();
 
     @Select(//language=PostgreSQL
-            "SELECT * FROM accesses WHERE id = #{id}")
+            "SELECT branch_uuid, user_id as userId FROM accesses WHERE id = #{id}")
     AccessDto findById(int id);
 
     @Insert(//language=PostgreSQL
-            "INSERT INTO accesses (branch_uuid, user_uuid) VALUES (#{branchUuid}, #{userUuid})")
+            "INSERT INTO accesses (branch_uuid, user_id) VALUES (#{branchUuid}, #{userId})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(AccessDto access);
 
     @Update(//language=PostgreSQL
-            "UPDATE accesses SET branch_uuid = #{branchUuid}, user_uuid = #{userUuid} WHERE id = #{id}")
+            "UPDATE accesses SET branch_uuid = #{branchUuid}, user_id = #{userId} WHERE id = #{id}")
     void update(AccessDto access);
 
     @Delete(//language=PostgreSQL
@@ -35,7 +35,7 @@ public interface AccessDao {
     void updateBranchUuid(@Param("id") int id, @Param("branchUuid") String branchUuid);
 
     @Update(//language=PostgreSQL
-            "UPDATE accesses SET user_uuid = #{userUuid} WHERE id = #{id}")
-    void updateUserUuid(@Param("id") int id, @Param("userUuid") String userUuid);
+            "UPDATE accesses SET user_id = #{userId} WHERE id = #{id}")
+    void updateUserUuid(@Param("id") int id, @Param("userId") Long userId);
 
 }

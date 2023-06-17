@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS event
+CREATE TABLE IF NOT EXISTS events
 (
     uuid        varchar NOT NULL,
     title       varchar NOT NULL,
@@ -9,8 +9,8 @@ CREATE TABLE IF NOT EXISTS event
     CONSTRAINT pk_events PRIMARY KEY (uuid)
 );
 
-ALTER TABLE event
-    ADD COLUMN IF NOT EXISTS image jsonb DEFAULT NULL,
+ALTER TABLE events
+    ADD COLUMN IF NOT EXISTS image json DEFAULT NULL,
 
     DROP COLUMN IF EXISTS body,
 

@@ -1,6 +1,10 @@
 databaseChangeLog:
 
   - include:
+      file: 1_0/set-work-mem.sql
+      relativeToChangelogFile: true
+
+  - include:
       file: 1_0/truncate-changelog-tables.sql
       relativeToChangelogFile: true
 
@@ -86,4 +90,8 @@ databaseChangeLog:
 
   - include:
       file: 1_0/add_fk_keys.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: 1_0/indexes.sql
       relativeToChangelogFile: true

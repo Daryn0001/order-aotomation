@@ -5,26 +5,26 @@ ALTER TABLE orders
     ADD CONSTRAINT fk_orders_tables FOREIGN KEY (table_uuid) REFERENCES tables (uuid);
 
 
-ALTER TABLE basket
+ALTER TABLE baskets
     DROP CONSTRAINT IF EXISTS fk_baskets_dishes,
     DROP CONSTRAINT IF EXISTS fk_baskets_orders;
 
-ALTER TABLE basket
-    ADD CONSTRAINT fk_baskets_dishes FOREIGN KEY (dish_uuid) REFERENCES dish (uuid),
+ALTER TABLE baskets
+    ADD CONSTRAINT fk_baskets_dishes FOREIGN KEY (dish_uuid) REFERENCES dishes (uuid),
     ADD CONSTRAINT fk_baskets_orders FOREIGN KEY (order_uuid) REFERENCES orders (uuid);
 
 
-ALTER TABLE dish
+ALTER TABLE dishes
     DROP CONSTRAINT IF EXISTS fk_dishes_categories;
 
-ALTER TABLE dish
-    ADD CONSTRAINT fk_dishes_categories FOREIGN KEY (category_id) REFERENCES category (id);
+ALTER TABLE dishes
+    ADD CONSTRAINT fk_dishes_categories FOREIGN KEY (category_id) REFERENCES categories (id);
 
 
-ALTER TABLE event
+ALTER TABLE events
     DROP CONSTRAINT IF EXISTS events_places_uuid_places_uuid;
 
-ALTER TABLE event
+ALTER TABLE events
     ADD CONSTRAINT events_places_uuid_places_uuid FOREIGN KEY (places_uuid) REFERENCES place (uuid);
 
 
@@ -33,15 +33,15 @@ ALTER TABLE elements
     DROP CONSTRAINT IF EXISTS Elements_event_uuid_Events_uuid;
 
 ALTER TABLE elements
-    ADD CONSTRAINT Elements_dish_uuid_Dishes_uuid  FOREIGN KEY  (dish_uuid) REFERENCES dish (uuid),
-    ADD CONSTRAINT Elements_event_uuid_Events_uuid FOREIGN KEY (event_uuid) REFERENCES event (uuid);
+    ADD CONSTRAINT Elements_dish_uuid_Dishes_uuid  FOREIGN KEY  (dish_uuid) REFERENCES dishes (uuid),
+    ADD CONSTRAINT Elements_event_uuid_Events_uuid FOREIGN KEY (event_uuid) REFERENCES events (uuid);
 
 
 ALTER TABLE companies
     DROP CONSTRAINT IF EXISTS fk_companies_users;
 
 ALTER TABLE companies
-    ADD CONSTRAINT fk_companies_users FOREIGN KEY (owner_uuid) REFERENCES users (id);
+    ADD CONSTRAINT fk_companies_users FOREIGN KEY (owner_id) REFERENCES users (id);
 
 
 
@@ -65,8 +65,8 @@ ALTER TABLE branches
     DROP CONSTRAINT IF EXISTS fk_branches_users;
 
 ALTER TABLE branches
-    ADD CONSTRAINT fk_branches_companies FOREIGN KEY (company_id) REFERENCES companies (uuid),
-    ADD CONSTRAINT fk_branches_users FOREIGN KEY (admin_uuid) REFERENCES users (id);
+    ADD CONSTRAINT fk_branches_companies FOREIGN KEY (company_uuid) REFERENCES companies (uuid),
+    ADD CONSTRAINT fk_branches_users FOREIGN KEY (admin_id) REFERENCES users (id);
 
 
 ALTER TABLE model_has_permissions

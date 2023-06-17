@@ -4,6 +4,8 @@ import kz.sdu.stu.dsalimov.dto.db.Category;
 import kz.sdu.stu.dsalimov.dto.response.SuccessResponse;
 import kz.sdu.stu.dsalimov.register.CategoryRegister;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import java.util.List;
 @CrossOrigin(origins = {"http://localhost:3000", "https://order-automation-frontend-lake.vercel.app"})
 @RequestMapping(value = "/api")
 public class CategoryController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(EventController.class);
     private final CategoryRegister categoryRegister;
 
     @GetMapping("/categories")
@@ -26,9 +29,10 @@ public class CategoryController {
         );
     }
 
-    @GetMapping("/get-category/{id}")
+    @GetMapping("/get-category-by-id/{id}")
     public ResponseEntity<Category> findDishById(@PathVariable("id") int id) {
         Category category = this.categoryRegister.findById(id);
+        LOGGER.info("found category by id: " + id + " \ncategory: " + category);
         return new ResponseEntity<>(
                 category,
                 HttpStatus.OK
@@ -37,11 +41,7 @@ public class CategoryController {
 
     @PostMapping("/add/category")
     public ResponseEntity<SuccessResponse> insertCategory(@RequestBody Category category) {
-        System.out.println(" new category: " + category);
-        if ((category.getId() != 0)) {
-            throw new RuntimeException("Крч айди должен быть пустым");
-        }
-
+        LOGGER.info(" new category: " + category);
         this.categoryRegister.insert(category);
         return new ResponseEntity<>(new SuccessResponse(category, "new category added successfully"), HttpStatus.OK);
     }

@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.sql.Timestamp;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,5 +20,11 @@ public class BasketDto {
     private String dishUuid;
 
     private String orderUuid;
+
+    private int price;
+
+    private Timestamp createdAt;
+
+    private Timestamp updatedAt;
 
 }

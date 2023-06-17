@@ -1,9 +1,13 @@
 package kz.sdu.stu.dsalimov.controller;
 
 import kz.sdu.stu.dsalimov.dto.db.Dish;
+import kz.sdu.stu.dsalimov.dto.filter.SearchFilter;
 import kz.sdu.stu.dsalimov.dto.response.SuccessResponse;
 import kz.sdu.stu.dsalimov.register.DishRegister;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.json.JSONParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
@@ -16,6 +20,7 @@ import java.util.List;
 @RequestMapping(value = "/api")
 @CrossOrigin(origins = {"http://localhost:3000", "https://order-automation-frontend-lake.vercel.app"})
 public class DishesController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(EventController.class);
     private final DishRegister dishRegister;
 
     @GetMapping("/dishes")
@@ -28,13 +33,38 @@ public class DishesController {
         );
     }
 
-    @GetMapping("/get-dish/{uuid}")
+    @PostMapping("/get-dish/{uuid}")
     public ResponseEntity<Dish> findDishById(@PathVariable("uuid") String uuid) {
         Dish dish = this.dishRegister.findById(uuid);
         return new ResponseEntity<>(
                 dish,
                 HttpStatus.OK
         );
+    }
+
+    @PostMapping("/get-dish-by-event/{eventUuid}")
+    public List<Dish> getDishByEvent(@PathVariable("eventUuid") String eventUuid) {
+        LOGGER.info("1h3uK3D4kir :: eventUuid: " + eventUuid);
+
+        return this.dishRegister.getDishesByEvent(eventUuid);
+    }
+
+    @PostMapping("/get-dish-by-filter")
+    public ResponseEntity<List<Object>> getDishesByFilter(@RequestBody SearchFilter filter) {
+        LOGGER.info("ViZg29GO :: filter from cont: " + filter);
+        var dishes = this.dishRegister.getDishesByFilter(filter);
+        LOGGER.info("0wtq4TH2m48 :: dishes by filter: " + dishes);
+
+        return new ResponseEntity<>( dishes, HttpStatus.OK);
+    }
+
+    @GetMapping("/get-dish-by-category/{categoryId}")
+    public ResponseEntity<List<Dish>> getDishesByCategory(@PathVariable("categoryId") int categoryId) {
+        LOGGER.info("VB4T2a1Pka :: category id: " + categoryId);
+        var dishes = this.dishRegister.getDishesByCategory(categoryId);
+        LOGGER.info("XFyu5v :: dishes by categoryId : " + dishes);
+
+        return new ResponseEntity<>(dishes, HttpStatus.OK);
     }
 
     @PostMapping("/delete-dish/{uuid}")
@@ -44,7 +74,7 @@ public class DishesController {
 
     @PostMapping("add/dish")
     public ResponseEntity<SuccessResponse> insertDish(@RequestBody Dish dish) {
-        System.out.println(" new dish: " + dish);
+        LOGGER.info("WcYSQ836 :: new dish: " + dish);
 
         if (!ObjectUtils.isEmpty(dish.getUuid())) {
             throw new RuntimeException(" Крч айлди должен быть пустым");
@@ -56,7 +86,7 @@ public class DishesController {
 
     @PostMapping("update-dish/{uuid}")
     public void updateDish(@RequestBody Dish dish, @PathVariable("uuid") String uuid) {
-        System.out.println("uuid: " + uuid + "\nupdate dish: " + dish);
+        LOGGER.info("lLMwDYctg1 :: uuid: " + uuid + "\nupdate dish: " + dish);
 
         this.dishRegister.update(uuid, dish);
     }

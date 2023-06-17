@@ -10,11 +10,11 @@ import java.util.List;
 @Repository
 public interface ElementDao {
     @Select(//language=PostgreSQL
-            "SELECT * FROM elements")
+            "SELECT uuid, dish_uuid as dishUuid, event_uuid as eventUuid FROM elements")
     List<Element> findAll();
 
     @Select(//language=PostgreSQL
-            "SELECT * FROM elements WHERE uuid = #{uuid}")
+            "SELECT uuid, dish_uuid as dishUuid, event_uuid as eventUuid FROM elements WHERE uuid = #{uuid}")
     Element findByUuid(String uuid);
 
     @Insert(//language=PostgreSQL

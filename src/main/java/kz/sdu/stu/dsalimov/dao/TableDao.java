@@ -1,6 +1,6 @@
 package kz.sdu.stu.dsalimov.dao;
 
-import kz.sdu.stu.dsalimov.dto.db.Tables;
+import kz.sdu.stu.dsalimov.dto.db.Table;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -11,15 +11,20 @@ import java.util.List;
 public interface TableDao {
     @Select(//language=PostgreSQL
             "SELECT uuid, internal_id as internalId, temporary_key as temporaryKey, branch_uuid as branchUuid FROM tables")
-    List<Tables> findAll();
+    List<Table> findAll();
 
     @Select(//language=PostgreSQL
-            "select * from tables where uuid = #{uuid}")
-    Tables findById(String uuid);
+            "select  uuid, internal_id as internalId, temporary_key as temporaryKey, branch_uuid as branchUuid from tables where uuid = #{uuid}")
+    Table findById(String uuid);
+
+    @Select(//language=PostgreSQL
+            "select  uuid, internal_id as internalId, temporary_key as temporaryKey, branch_uuid as branchUuid from tables " +
+                    "where temporary_key = #{temporary_key}")
+    Table findByTempKey(String temporaryKey);
 
     @Insert(//language=PostgreSQL
             "INSERT INTO tables (uuid,  internal_id, temporary_key, branch_uuid) VALUES (#{uuid}, #{internalId}, #{temporaryKey}, #{branchUuid})")
-    String insert(Tables table);
+    String insert(Table table);
 
     @Delete(//language=PostgreSQL
             "DELETE FROM tables WHERE uuid = #{uuid}")
