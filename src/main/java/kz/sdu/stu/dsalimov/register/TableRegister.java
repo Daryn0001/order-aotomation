@@ -11,6 +11,8 @@ public interface TableRegister {
 
     String insert(Table table);
 
+    String getBranchUuidByTemporaryKey(String temporaryKey);
+
     void delete(String uuid);
 
     void update(Table table);

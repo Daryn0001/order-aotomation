@@ -41,6 +41,11 @@ public class TableController {
         return new ResponseEntity<>(this.tableRegister.findById(uuid), HttpStatus.OK);
     }
 
+    @PostMapping("/get-branch-id")
+    public String getBranchUuidByTemporaryKey(@RequestParam("temporaryKey") String temporaryKey) {
+        return this.tableRegister.getBranchUuidByTemporaryKey(temporaryKey);
+    }
+
     @PostMapping("/add/table")
     public void insertTable(@RequestBody Table table) {
 

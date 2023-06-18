@@ -1,6 +1,6 @@
 package kz.sdu.stu.dsalimov.controller;
 
-import kz.sdu.stu.dsalimov.dto.to_client.MainPageBody;
+import kz.sdu.stu.dsalimov.dto.to_client.SliderData;
 import kz.sdu.stu.dsalimov.dto.to_client.MainPageHeader;
 import kz.sdu.stu.dsalimov.register.MainPageRegister;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +20,12 @@ public class MainPageController {
     private final MainPageRegister mainPageRegister;
 
     @GetMapping("/get-slider-data")
-    public ResponseEntity<MainPageBody> getBody(@RequestParam String temporaryKey) {
-        var body = this.mainPageRegister.getBody(temporaryKey);
+    public ResponseEntity<SliderData> getSliderData(@RequestParam String temporaryKey) {
+        var sliderData = this.mainPageRegister.getBody(temporaryKey);
 
-        LOGGER.info("od2f6OqG3w :: body: " + body);
+        LOGGER.info("od2f6OqG3w :: sliderData: " + sliderData);
 
-        return new ResponseEntity<>(body,  HttpStatus.OK);
+        return new ResponseEntity<>(sliderData,  HttpStatus.OK);
     }
 
     @GetMapping("/get-header-data")

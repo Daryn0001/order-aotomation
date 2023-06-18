@@ -6,11 +6,11 @@ import kz.sdu.stu.dsalimov.dto.filter.SearchFilter;
 import java.util.List;
 
 public interface CategoryRegister {
-    List<Category> getCategories();
+    List<Category> getCategories(String branchUuid);
 
     Category findById(int uuid);
 
-    List<Category> getCategoriesByFilter(SearchFilter filter);
+    List<Category> getCategoriesByFilter(SearchFilter filter,  String branchUuid);
 
     void insert(Category category);
 

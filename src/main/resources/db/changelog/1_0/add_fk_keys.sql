@@ -20,6 +20,11 @@ ALTER TABLE dishes
 ALTER TABLE dishes
     ADD CONSTRAINT fk_dishes_categories FOREIGN KEY (category_id) REFERENCES categories (id);
 
+ALTER TABLE categories
+    DROP CONSTRAINT IF EXISTS fk_categories_branch_uuid;
+
+ALTER TABLE categories
+    ADD CONSTRAINT fk_categories_branch_uuid FOREIGN KEY (branch_uuid) REFERENCES branches (uuid);
 
 ALTER TABLE events
     DROP CONSTRAINT IF EXISTS events_places_uuid_places_uuid;

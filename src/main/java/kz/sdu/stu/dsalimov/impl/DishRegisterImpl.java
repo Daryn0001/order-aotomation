@@ -47,9 +47,9 @@ public class DishRegisterImpl implements DishRegister {
     }
 
     @Override
-    public List<Object> getDishesByFilter(SearchFilter filter) {
+    public List<Object> getDishesByFilter(SearchFilter filter,  String branchUuid) {
         var searchResponse = new SearchResponse();
-        var categories = this.categoryDao.getCategoriesByFilter(filter);
+        var categories = this.categoryDao.getCategoriesByFilter(filter, branchUuid);
         var dishes = dishDao.getDishesByFilter(filter);
 
         searchResponse.setDishes(dishes);

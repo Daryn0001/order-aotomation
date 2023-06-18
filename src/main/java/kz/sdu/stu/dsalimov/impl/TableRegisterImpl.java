@@ -32,6 +32,11 @@ public class TableRegisterImpl implements TableRegister {
     }
 
     @Override
+    public String getBranchUuidByTemporaryKey(String temporaryKey) {
+        return this.tableDao.findByTempKey(temporaryKey).getBranchUuid();
+    }
+
+    @Override
     public void delete(String uuid) {
         this.tableDao.delete(uuid);
     }

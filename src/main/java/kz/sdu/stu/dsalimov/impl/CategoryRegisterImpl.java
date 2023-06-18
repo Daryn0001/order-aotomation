@@ -18,8 +18,8 @@ public class CategoryRegisterImpl implements CategoryRegister {
     private CategoryDao categoryDao;
 
     @Override
-    public List<Category> getCategories() {
-        return  this.categoryDao.getCategories();
+    public List<Category> getCategories(String branchUui) {
+        return  this.categoryDao.getCategories(branchUui);
     }
 
     @Override
@@ -31,8 +31,8 @@ public class CategoryRegisterImpl implements CategoryRegister {
     }
 
     @Override
-    public List<Category> getCategoriesByFilter(SearchFilter filter) {
-        return this.categoryDao.getCategoriesByFilter(filter);
+    public List<Category> getCategoriesByFilter(SearchFilter filter, String branchUuid) {
+        return this.categoryDao.getCategoriesByFilter(filter, branchUuid);
     }
 
     @Override

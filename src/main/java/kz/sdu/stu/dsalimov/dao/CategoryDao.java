@@ -13,23 +13,24 @@ import java.util.List;
 @Repository
 public interface CategoryDao {
     @Select(//language=PostgreSQL
-            "SELECT id, parent_category_id as parentCategoryId, name, description, image FROM categories")
-    List<Category> getCategories();
+            "SELECT id, parent_category_id as parentCategoryId, c.name, description, image, branch_uuid as branchUuid FROM categories c JOIN branches b on c.branch_uuid = b.uuid " +
+                    "where c.branch_uuid = #{branchId}")
+    List<Category> getCategories(String branchId);
 
     @Select(//language=PostgreSQL
-            "SELECT id, parent_category_id as parentCategoryId, name, description, image FROM categories where id = #{id}")
+            "SELECT id, parent_category_id as parentCategoryId, name, description, image, branch_uuid as branchId FROM categories where id = #{id}")
     Category findById(int id);
 
     @SelectProvider(value = CategoryProvider.class, method = "getCategoriesByFilter")
-    List<Category> getCategoriesByFilter(@Param("filter") SearchFilter filter);
+    List<Category> getCategoriesByFilter(@Param("filter") SearchFilter filter, @Param("branchUuid") String branchUuid);
 
     @Select(//language=PostgreSQL
             "select count(*) from dishes join categories c on dishes.category_id = c.id where category_id = #{categoryId}")
     int getDishCountFromCategory(@Param("categoryId") int categoryId);
 
     @Insert(//language=PostgreSQL
-            "INSERT INTO categories ( parent_category_id, name, description, image)" +
-                    " VALUES ( #{category.parentCategoryId}, #{category.name}, #{category.description}, #{image})")
+            "INSERT INTO categories ( parent_category_id, name, description, image, branch_uuid)" +
+                    " VALUES ( #{category.parentCategoryId}, #{category.name}, #{category.description}, #{image}, #{category.branchId})")
     void insert(Category category, PGobject image);
 
     @Delete(//language=PostgreSQL
@@ -56,23 +57,23 @@ public interface CategoryDao {
     void updateDescription(int id, String description);
 
     class CategoryProvider {
-        public String getCategoriesByFilter(@Param("filter") SearchFilter filter) {
+        public String getCategoriesByFilter(@Param("filter") SearchFilter filter, @Param("branchUuid") String branchUuid) {
             System.out.println("NOttNNPqmqRm :: filter from category dao: " + filter);
             SQL sql = new SQL();
 
             int offset = filter.getOffset() * filter.getLimit();
 
-            SQL query = baseQuery(sql);
+            SQL query = baseQuery(sql, branchUuid);
 
             if (filter.getSearchText() != null && !filter.getSearchText().isBlank()) {
                 String searchText = "%" + filter.getSearchText() + "%";
-                String search = String.format("name ILIKE '%s'", searchText);
+                String search = String.format("c.name ILIKE '%s'", searchText);
                 query.WHERE(search);
             }
             if (filter.getDirection() != null && !filter.getDirection().isBlank()) {
-                query.ORDER_BY("name " + filter.getDirection());
+                query.ORDER_BY("c.name " + filter.getDirection());
             } else {
-                query.ORDER_BY("name asc");
+                query.ORDER_BY("c.name asc");
             }
 
             query.LIMIT(filter.getLimit())
@@ -82,9 +83,10 @@ public interface CategoryDao {
             return query.toString();
         }
 
-        private SQL baseQuery(SQL sql) {
-            return sql.SELECT(" id, parent_category_id as parentCategoryId, name, description, image")
-                    .FROM("categories");
+        private SQL baseQuery(SQL sql, String branchId) {
+            return sql.SELECT(" id, parent_category_id as parentCategoryId, c.name, description, image")
+                    .FROM("categories c join branches b on c.branch_uuid = b.uuid")
+                    .WHERE("c.branch_uuid = '" + branchId + "'");
 
         }
     }

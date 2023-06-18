@@ -24,4 +24,6 @@ public class Category {
     private String image;
 
     private int dishCount;
+
+    private String branchUuid;
 }

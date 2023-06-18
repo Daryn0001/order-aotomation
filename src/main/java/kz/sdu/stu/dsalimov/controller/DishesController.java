@@ -5,7 +5,6 @@ import kz.sdu.stu.dsalimov.dto.filter.SearchFilter;
 import kz.sdu.stu.dsalimov.dto.response.SuccessResponse;
 import kz.sdu.stu.dsalimov.register.DishRegister;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.json.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -50,9 +49,9 @@ public class DishesController {
     }
 
     @PostMapping("/get-dish-by-filter")
-    public ResponseEntity<List<Object>> getDishesByFilter(@RequestBody SearchFilter filter) {
+    public ResponseEntity<List<Object>> getDishesByFilter(@RequestBody SearchFilter filter, @RequestParam String branchUuid) {
         LOGGER.info("ViZg29GO :: filter from cont: " + filter);
-        var dishes = this.dishRegister.getDishesByFilter(filter);
+        var dishes = this.dishRegister.getDishesByFilter(filter, branchUuid);
         LOGGER.info("0wtq4TH2m48 :: dishes by filter: " + dishes);
 
         return new ResponseEntity<>( dishes, HttpStatus.OK);

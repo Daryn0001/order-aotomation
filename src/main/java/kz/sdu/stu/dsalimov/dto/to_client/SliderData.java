@@ -8,14 +8,14 @@ import java.util.Map;
 
 @Data
 @AllArgsConstructor
-public class MainPageBody {
-    private Map<String, Slide> data;
+public class SliderData {
+    private Map<String, Slide> stringSlideMap;
 
-    public MainPageBody() {
-        data = new HashMap<>();
+    public SliderData() {
+        stringSlideMap = new HashMap<>();
     }
 
     public void addSlides(String slideName, Slide slide) {
-        this.data.put(slideName, slide);
+        this.stringSlideMap.put(slideName, slide);
     }
 }

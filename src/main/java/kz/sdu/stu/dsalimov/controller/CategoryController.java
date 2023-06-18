@@ -20,9 +20,9 @@ public class CategoryController {
     private static final Logger LOGGER = LoggerFactory.getLogger(EventController.class);
     private final CategoryRegister categoryRegister;
 
-    @GetMapping("/categories")
-    public ResponseEntity<List<Category>> getCategories() {
-        List<Category> categories = this.categoryRegister.getCategories();
+    @PostMapping("/categories")
+    public ResponseEntity<List<Category>> getCategories(@RequestParam("branchUuid") String branchUuid) {
+        List<Category> categories = this.categoryRegister.getCategories(branchUuid);
         return new ResponseEntity<>(
                 categories,
                 HttpStatus.OK
@@ -30,7 +30,7 @@ public class CategoryController {
     }
 
     @GetMapping("/get-category-by-id/{id}")
-    public ResponseEntity<Category> findDishById(@PathVariable("id") int id) {
+    public ResponseEntity<Category> findCategoryById(@PathVariable("id") int id) {
         Category category = this.categoryRegister.findById(id);
         LOGGER.info("found category by id: " + id + " \ncategory: " + category);
         return new ResponseEntity<>(

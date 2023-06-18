@@ -12,7 +12,7 @@ public interface DishRegister {
 
     List<Dish> getDishesByEvent(String uuid);
 
-    List<Object> getDishesByFilter(SearchFilter filter);
+    List<Object> getDishesByFilter(SearchFilter filter,  String branchUuid);
 
     List<Dish> getDishesByCategory(int categoryId);
 

@@ -7,7 +7,7 @@ import kz.sdu.stu.dsalimov.dao.TableDao;
 import kz.sdu.stu.dsalimov.dto.db.Branch;
 import kz.sdu.stu.dsalimov.dto.db.Place;
 import kz.sdu.stu.dsalimov.dto.db.Table;
-import kz.sdu.stu.dsalimov.dto.to_client.MainPageBody;
+import kz.sdu.stu.dsalimov.dto.to_client.SliderData;
 import kz.sdu.stu.dsalimov.dto.to_client.MainPageHeader;
 import kz.sdu.stu.dsalimov.dto.to_client.Slide;
 import kz.sdu.stu.dsalimov.dto.to_client.SlideItem;
@@ -53,9 +53,9 @@ public class MainPageRegisterImpl implements MainPageRegister {
     }
 
     @Override
-    public MainPageBody getBody(String temporaryKey) {
+    public SliderData getBody(String temporaryKey) {
         List<Place> placeList;
-        var data = new MainPageBody();
+        var data = new SliderData();
 
         try {
             Table table = this.tableDao.findByTempKey(temporaryKey);
