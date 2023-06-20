@@ -18,7 +18,7 @@ public interface CategoryDao {
     List<Category> getCategories(String branchId);
 
     @Select(//language=PostgreSQL
-            "SELECT id, parent_category_id as parentCategoryId, name, description, image, branch_uuid as branchId FROM categories where id = #{id}")
+            "SELECT id, parent_category_id as parentCategoryId, name, description, image, branch_uuid as branchUuid FROM categories where id = #{id}")
     Category findById(int id);
 
     @SelectProvider(value = CategoryProvider.class, method = "getCategoriesByFilter")
