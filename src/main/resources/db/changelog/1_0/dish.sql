@@ -37,4 +37,7 @@ ALTER TABLE dishes
     ADD COLUMN IF NOT EXISTS created_at timestamp NULL DEFAULT NULL,
     ADD COLUMN IF NOT EXISTS updated_at timestamp NULL DEFAULT NULL;
 
+ALTER TABLE dishes ALTER COLUMN amount DROP NOT NULL,
+                   ALTER COLUMN amount SET DEFAULT 0;
+
 
