@@ -13,7 +13,7 @@ public class DbConfigForDebugServer implements DbConfig {
 
     @Override
     public String host() {
-        return "pgdb";
+        return "localhost";
     }
 
     @Override

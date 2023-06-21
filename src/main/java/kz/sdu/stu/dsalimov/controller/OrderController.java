@@ -10,7 +10,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/api")
-@CrossOrigin(origins = {"http://localhost:3000", "https://order-automation-frontend-lake.vercel.app"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://order-automation-frontend-lake.vercel.app", "http://77.243.80.82:3000"})
 public class OrderController {
     private final OrderRegister orderRegister;
 
