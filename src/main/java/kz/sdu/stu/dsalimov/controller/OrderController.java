@@ -25,8 +25,9 @@ public class OrderController {
     }
 
     @PostMapping("/add-order")
-    public void insertOrder(@RequestBody OrderDto order) {
+    public String insertOrder(@RequestBody OrderDto order) {
         this.orderRegister.insert(order);
+        return order.getUuid();
     }
 
     @PostMapping("/delete-order-by-id/{uuid}")
