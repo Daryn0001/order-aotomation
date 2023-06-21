@@ -30,7 +30,7 @@ ALTER TABLE events
     DROP CONSTRAINT IF EXISTS events_places_uuid_places_uuid;
 
 ALTER TABLE events
-    ADD CONSTRAINT events_places_uuid_places_uuid FOREIGN KEY (places_uuid) REFERENCES place (uuid);
+    ADD CONSTRAINT events_places_uuid_places_uuid FOREIGN KEY (places_uuid) REFERENCES places (uuid);
 
 
 ALTER TABLE elements
@@ -90,10 +90,10 @@ ALTER TABLE model_has_roles
         FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE;
 
 
-ALTER TABLE place
+ALTER TABLE places
     DROP CONSTRAINT IF EXISTS places_branch_uuid_foreign;
 
-ALTER TABLE place
+ALTER TABLE places
     ADD CONSTRAINT places_branch_uuid_foreign
         FOREIGN KEY (branch_uuid) REFERENCES branches (uuid) ON DELETE CASCADE;
 

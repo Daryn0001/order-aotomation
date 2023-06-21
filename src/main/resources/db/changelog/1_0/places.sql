@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS place
+CREATE TABLE IF NOT EXISTS places
 (
     uuid varchar NOT NULL,
     type varchar NOT NULL,
@@ -8,3 +8,6 @@ CREATE TABLE IF NOT EXISTS place
     CONSTRAINT unq_places_uuid UNIQUE (uuid),
     CONSTRAINT pk_places PRIMARY KEY (uuid)
 );
+
+ALTER TABLE IF EXISTS place
+    RENAME TO places;
